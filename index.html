@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f4f0" />
+    <meta name="description" content="宓语 StudyOS，以热爱之心，赴更好的自己。" />
+    <title>宓语 StudyOS</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/lineart/06_icons_svg/icon_flower.svg" />
+    <link rel="preload" as="image" href="/resource-packs/MiStudyOS_Home_4K_AssetPack/00_reference/home_reference_1672x941.png" />
+    <link rel="stylesheet" href="/src/home.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#course">跳到功能导航</a>
+    <main id="app" aria-label="宓语 StudyOS 首页">
+      <div id="stage-wrap"><div id="home-stage" class="home-stage" aria-label="StudyOS 纸墨书房"></div></div>
+      <div class="scene-tools" aria-label="动画控制">
+        <button id="replay-intro" title="重放出场动画">↺ <span>重绘此刻</span></button>
+        <span class="tool-divider"></span>
+        <button id="toggle-motion" aria-pressed="false">静止画卷</button>
+        <span class="scene-caption">宓 · 与你一起，慢慢生长</span>
+      </div>
+    </main>
+    <div id="intro-control" class="intro-control"><span id="intro-phase" aria-hidden="true">纸面苏醒</span><button id="skip-intro">跳过动画 <kbd>Esc</kbd></button></div>
+    <dialog id="module-dialog" class="module-dialog" aria-labelledby="dialog-title"></dialog>
+    <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title"></dialog>
+    <div id="toast" class="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

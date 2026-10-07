@@ -1,0 +1,1628 @@
+{
+  "package": "MiStudyOS Home 4K Asset Pack",
+  "version": "1.0",
+  "source_file": "宓语 StudyOS：雅致国风学习仪表盘(2).png",
+  "source_size": [
+    1672,
+    941
+  ],
+  "target_design_size": [
+    3840,
+    2160
+  ],
+  "coordinate_system": "top-left origin, pixels",
+  "notes": [
+    "The uploaded homepage artwork is a flattened raster image, not a layered PSD/SVG.",
+    "This package extracts visible non-character UI/decor regions and creates production-friendly transparent raster assets.",
+    "Dynamic text should be rendered by code; reference crops are included only for placement/style matching.",
+    "Occluded details hidden behind the central character cannot be reconstructed exactly from the flattened source."
+  ],
+  "assets": [
+    {
+      "id": "top_branch_left",
+      "type": "ornament",
+      "file": "01_top_decor/top_branch_left.png",
+      "source_bbox_px": [
+        0,
+        0,
+        720,
+        115
+      ],
+      "normalized_rect": [
+        0.0,
+        0.0,
+        0.430622,
+        0.12221
+      ],
+      "design_rect_3840x2160": [
+        0,
+        0,
+        1654,
+        264
+      ],
+      "z_index": 5,
+      "animation_hint": "idle sway 0.5-1px, 10-16s",
+      "code_render_text_recommended": false,
+      "notes": "Top-left branch, blossoms, hanging details. Keep title as code text.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "top_branch_right",
+      "type": "ornament",
+      "file": "01_top_decor/top_branch_right.png",
+      "source_bbox_px": [
+        760,
+        0,
+        1672,
+        118
+      ],
+      "normalized_rect": [
+        0.454545,
+        0.0,
+        0.545455,
+        0.125399
+      ],
+      "design_rect_3840x2160": [
+        1745,
+        0,
+        2095,
+        271
+      ],
+      "z_index": 5,
+      "animation_hint": "idle sway 0.5-1px, 11-17s",
+      "code_render_text_recommended": false,
+      "notes": "Top-right branch and blossoms.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "brand_lockup_reference",
+      "type": "reference",
+      "file": "01_top_decor/brand_lockup_reference.png",
+      "source_bbox_px": [
+        55,
+        35,
+        530,
+        205
+      ],
+      "normalized_rect": [
+        0.032895,
+        0.037194,
+        0.284091,
+        0.180659
+      ],
+      "design_rect_3840x2160": [
+        126,
+        80,
+        1091,
+        390
+      ],
+      "z_index": 5,
+      "animation_hint": "intro ink-write; no idle motion",
+      "code_render_text_recommended": true,
+      "notes": "Reference only; production title should be code-rendered for localization.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_vertical_frame",
+      "type": "ornament",
+      "file": "01_top_decor/left_vertical_frame.png",
+      "source_bbox_px": [
+        0,
+        75,
+        110,
+        605
+      ],
+      "normalized_rect": [
+        0.0,
+        0.079702,
+        0.065789,
+        0.563231
+      ],
+      "design_rect_3840x2160": [
+        0,
+        172,
+        253,
+        1217
+      ],
+      "z_index": 5,
+      "animation_hint": "parallax depth -0.15, max 2px",
+      "code_render_text_recommended": false,
+      "notes": "Left edge architectural/lantern frame.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_vertical_frame",
+      "type": "ornament",
+      "file": "01_top_decor/right_vertical_frame.png",
+      "source_bbox_px": [
+        1552,
+        75,
+        1672,
+        600
+      ],
+      "normalized_rect": [
+        0.92823,
+        0.079702,
+        0.07177,
+        0.557917
+      ],
+      "design_rect_3840x2160": [
+        3564,
+        172,
+        276,
+        1205
+      ],
+      "z_index": 5,
+      "animation_hint": "parallax depth -0.15, max 2px",
+      "code_render_text_recommended": false,
+      "notes": "Right edge architectural/lantern frame.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_01_course_hub_reference",
+      "type": "panel_reference",
+      "file": "02_left_wing_panels/left_panel_01_course_hub_reference.png",
+      "source_bbox_px": [
+        85,
+        208,
+        475,
+        366
+      ],
+      "normalized_rect": [
+        0.050837,
+        0.221041,
+        0.233254,
+        0.167906
+      ],
+      "design_rect_3840x2160": [
+        195,
+        477,
+        896,
+        363
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_01_course_hub_frame",
+      "type": "panel_frame",
+      "file": "02_left_wing_panels/left_panel_01_course_hub_frame.png",
+      "source_bbox_px": [
+        85,
+        208,
+        475,
+        366
+      ],
+      "normalized_rect": [
+        0.050837,
+        0.221041,
+        0.233254,
+        0.167906
+      ],
+      "design_rect_3840x2160": [
+        195,
+        477,
+        896,
+        363
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, flowers sway 1px, 160ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with inner content cleared for code-rendered text/icons.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_02_smart_calendar_reference",
+      "type": "panel_reference",
+      "file": "02_left_wing_panels/left_panel_02_smart_calendar_reference.png",
+      "source_bbox_px": [
+        48,
+        345,
+        478,
+        505
+      ],
+      "normalized_rect": [
+        0.028708,
+        0.366631,
+        0.257177,
+        0.170032
+      ],
+      "design_rect_3840x2160": [
+        110,
+        792,
+        988,
+        367
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_02_smart_calendar_frame",
+      "type": "panel_frame",
+      "file": "02_left_wing_panels/left_panel_02_smart_calendar_frame.png",
+      "source_bbox_px": [
+        48,
+        345,
+        478,
+        505
+      ],
+      "normalized_rect": [
+        0.028708,
+        0.366631,
+        0.257177,
+        0.170032
+      ],
+      "design_rect_3840x2160": [
+        110,
+        792,
+        988,
+        367
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, flowers sway 1px, 160ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with inner content cleared for code-rendered text/icons.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_03_assignment_workspace_reference",
+      "type": "panel_reference",
+      "file": "02_left_wing_panels/left_panel_03_assignment_workspace_reference.png",
+      "source_bbox_px": [
+        43,
+        500,
+        478,
+        659
+      ],
+      "normalized_rect": [
+        0.025718,
+        0.53135,
+        0.260167,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        99,
+        1148,
+        999,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_03_assignment_workspace_frame",
+      "type": "panel_frame",
+      "file": "02_left_wing_panels/left_panel_03_assignment_workspace_frame.png",
+      "source_bbox_px": [
+        43,
+        500,
+        478,
+        659
+      ],
+      "normalized_rect": [
+        0.025718,
+        0.53135,
+        0.260167,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        99,
+        1148,
+        999,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, flowers sway 1px, 160ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with inner content cleared for code-rendered text/icons.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_04_flashcards_reference",
+      "type": "panel_reference",
+      "file": "02_left_wing_panels/left_panel_04_flashcards_reference.png",
+      "source_bbox_px": [
+        55,
+        646,
+        478,
+        805
+      ],
+      "normalized_rect": [
+        0.032895,
+        0.686504,
+        0.25299,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        126,
+        1483,
+        971,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "left_panel_04_flashcards_frame",
+      "type": "panel_frame",
+      "file": "02_left_wing_panels/left_panel_04_flashcards_frame.png",
+      "source_bbox_px": [
+        55,
+        646,
+        478,
+        805
+      ],
+      "normalized_rect": [
+        0.032895,
+        0.686504,
+        0.25299,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        126,
+        1483,
+        971,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, flowers sway 1px, 160ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with inner content cleared for code-rendered text/icons.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_01_writing_studio_reference",
+      "type": "panel_reference",
+      "file": "03_right_wing_panels/right_panel_01_writing_studio_reference.png",
+      "source_bbox_px": [
+        1190,
+        206,
+        1610,
+        367
+      ],
+      "normalized_rect": [
+        0.711722,
+        0.218916,
+        0.251196,
+        0.171095
+      ],
+      "design_rect_3840x2160": [
+        2733,
+        473,
+        965,
+        370
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_01_writing_studio_frame",
+      "type": "panel_frame",
+      "file": "03_right_wing_panels/right_panel_01_writing_studio_frame.png",
+      "source_bbox_px": [
+        1190,
+        206,
+        1610,
+        367
+      ],
+      "normalized_rect": [
+        0.711722,
+        0.218916,
+        0.251196,
+        0.171095
+      ],
+      "design_rect_3840x2160": [
+        2733,
+        473,
+        965,
+        370
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, tassel follow-through 200ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with content cleared.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_02_exam_mistake_reference",
+      "type": "panel_reference",
+      "file": "03_right_wing_panels/right_panel_02_exam_mistake_reference.png",
+      "source_bbox_px": [
+        1185,
+        353,
+        1610,
+        512
+      ],
+      "normalized_rect": [
+        0.708732,
+        0.375133,
+        0.254187,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        2722,
+        810,
+        976,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_02_exam_mistake_frame",
+      "type": "panel_frame",
+      "file": "03_right_wing_panels/right_panel_02_exam_mistake_frame.png",
+      "source_bbox_px": [
+        1185,
+        353,
+        1610,
+        512
+      ],
+      "normalized_rect": [
+        0.708732,
+        0.375133,
+        0.254187,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        2722,
+        810,
+        976,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, tassel follow-through 200ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with content cleared.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_03_campus_inbox_reference",
+      "type": "panel_reference",
+      "file": "03_right_wing_panels/right_panel_03_campus_inbox_reference.png",
+      "source_bbox_px": [
+        1188,
+        500,
+        1613,
+        661
+      ],
+      "normalized_rect": [
+        0.710526,
+        0.53135,
+        0.254187,
+        0.171095
+      ],
+      "design_rect_3840x2160": [
+        2728,
+        1148,
+        976,
+        370
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_03_campus_inbox_frame",
+      "type": "panel_frame",
+      "file": "03_right_wing_panels/right_panel_03_campus_inbox_frame.png",
+      "source_bbox_px": [
+        1188,
+        500,
+        1613,
+        661
+      ],
+      "normalized_rect": [
+        0.710526,
+        0.53135,
+        0.254187,
+        0.171095
+      ],
+      "design_rect_3840x2160": [
+        2728,
+        1148,
+        976,
+        370
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, tassel follow-through 200ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with content cleared.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_04_originality_reference",
+      "type": "panel_reference",
+      "file": "03_right_wing_panels/right_panel_04_originality_reference.png",
+      "source_bbox_px": [
+        1192,
+        647,
+        1612,
+        806
+      ],
+      "normalized_rect": [
+        0.712919,
+        0.687566,
+        0.251196,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        2738,
+        1485,
+        965,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "wing reveal; outline first, icon second, text third, arrow last",
+      "code_render_text_recommended": true,
+      "notes": "Full visible panel reference. Use for pixel matching only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "right_panel_04_originality_frame",
+      "type": "panel_frame",
+      "file": "03_right_wing_panels/right_panel_04_originality_frame.png",
+      "source_bbox_px": [
+        1192,
+        647,
+        1612,
+        806
+      ],
+      "normalized_rect": [
+        0.712919,
+        0.687566,
+        0.251196,
+        0.168969
+      ],
+      "design_rect_3840x2160": [
+        2738,
+        1485,
+        965,
+        365
+      ],
+      "z_index": 10,
+      "animation_hint": "hover: frame darken +1, tassel follow-through 200ms",
+      "code_render_text_recommended": false,
+      "notes": "Frame/decor layer with content cleared.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "center_daily_dashboard_reference",
+      "type": "card_reference",
+      "file": "04_center_cards/center_daily_dashboard_reference.png",
+      "source_bbox_px": [
+        548,
+        586,
+        1120,
+        711
+      ],
+      "normalized_rect": [
+        0.327751,
+        0.622742,
+        0.342105,
+        0.132837
+      ],
+      "design_rect_3840x2160": [
+        1259,
+        1345,
+        1314,
+        287
+      ],
+      "z_index": 15,
+      "animation_hint": "intro settle: translateY 8px->0, opacity 0->1, 320ms",
+      "code_render_text_recommended": true,
+      "notes": "Reference crop with baked labels. Production label should be code text.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "center_daily_dashboard_frame",
+      "type": "card_frame",
+      "file": "04_center_cards/center_daily_dashboard_frame.png",
+      "source_bbox_px": [
+        548,
+        586,
+        1120,
+        711
+      ],
+      "normalized_rect": [
+        0.327751,
+        0.622742,
+        0.342105,
+        0.132837
+      ],
+      "design_rect_3840x2160": [
+        1259,
+        1345,
+        1314,
+        287
+      ],
+      "z_index": 15,
+      "animation_hint": "hover: translateY(-3px), border emphasis, 180ms",
+      "code_render_text_recommended": false,
+      "notes": "Ornamental card frame with center content cleared.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "center_grade_tracker_reference",
+      "type": "card_reference",
+      "file": "04_center_cards/center_grade_tracker_reference.png",
+      "source_bbox_px": [
+        548,
+        700,
+        1120,
+        828
+      ],
+      "normalized_rect": [
+        0.327751,
+        0.743889,
+        0.342105,
+        0.136026
+      ],
+      "design_rect_3840x2160": [
+        1259,
+        1607,
+        1314,
+        294
+      ],
+      "z_index": 15,
+      "animation_hint": "intro settle: translateY 8px->0, opacity 0->1, 320ms",
+      "code_render_text_recommended": true,
+      "notes": "Reference crop with baked labels. Production label should be code text.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "center_grade_tracker_frame",
+      "type": "card_frame",
+      "file": "04_center_cards/center_grade_tracker_frame.png",
+      "source_bbox_px": [
+        548,
+        700,
+        1120,
+        828
+      ],
+      "normalized_rect": [
+        0.327751,
+        0.743889,
+        0.342105,
+        0.136026
+      ],
+      "design_rect_3840x2160": [
+        1259,
+        1607,
+        1314,
+        294
+      ],
+      "z_index": 15,
+      "animation_hint": "hover: translateY(-3px), border emphasis, 180ms",
+      "code_render_text_recommended": false,
+      "notes": "Ornamental card frame with center content cleared.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "mi_greeting_bubble_reference",
+      "type": "dialog_reference",
+      "file": "05_dialog_bubbles/mi_greeting_bubble_reference.png",
+      "source_bbox_px": [
+        985,
+        136,
+        1295,
+        286
+      ],
+      "normalized_rect": [
+        0.589115,
+        0.144527,
+        0.185407,
+        0.159405
+      ],
+      "design_rect_3840x2160": [
+        2262,
+        312,
+        712,
+        344
+      ],
+      "z_index": 30,
+      "animation_hint": "intro: border draw 220ms -> paper fade 100ms -> text reveal 180ms",
+      "code_render_text_recommended": true,
+      "notes": "Reference greeting bubble; text should be code-rendered.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "mi_greeting_bubble_frame",
+      "type": "dialog_frame",
+      "file": "05_dialog_bubbles/mi_greeting_bubble_frame.png",
+      "source_bbox_px": [
+        985,
+        136,
+        1295,
+        286
+      ],
+      "normalized_rect": [
+        0.589115,
+        0.144527,
+        0.185407,
+        0.159405
+      ],
+      "design_rect_3840x2160": [
+        2262,
+        312,
+        712,
+        344
+      ],
+      "z_index": 30,
+      "animation_hint": "pop: scale .985->1 + opacity, 220ms",
+      "code_render_text_recommended": false,
+      "notes": "Bubble frame/decor only.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "search_bar_reference",
+      "type": "reference",
+      "file": "06_topbar_shells/search_bar_reference.png",
+      "source_bbox_px": [
+        1018,
+        21,
+        1310,
+        77
+      ],
+      "normalized_rect": [
+        0.608852,
+        0.022317,
+        0.174641,
+        0.059511
+      ],
+      "design_rect_3840x2160": [
+        2338,
+        48,
+        671,
+        129
+      ],
+      "z_index": 25,
+      "animation_hint": "intro stagger fade 60-90ms",
+      "code_render_text_recommended": true,
+      "notes": "Use as placement/style reference; render actual search field in code.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "user_header_reference",
+      "type": "reference",
+      "file": "06_topbar_shells/user_header_reference.png",
+      "source_bbox_px": [
+        1310,
+        18,
+        1660,
+        124
+      ],
+      "normalized_rect": [
+        0.783493,
+        0.019129,
+        0.20933,
+        0.112646
+      ],
+      "design_rect_3840x2160": [
+        3009,
+        41,
+        804,
+        243
+      ],
+      "z_index": 25,
+      "animation_hint": "intro stagger fade 60-90ms",
+      "code_render_text_recommended": true,
+      "notes": "Reference for notification/settings/avatar/user layout.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "greeting_reference",
+      "type": "reference",
+      "file": "06_topbar_shells/greeting_reference.png",
+      "source_bbox_px": [
+        1245,
+        82,
+        1615,
+        205
+      ],
+      "normalized_rect": [
+        0.744617,
+        0.087141,
+        0.221292,
+        0.130712
+      ],
+      "design_rect_3840x2160": [
+        2859,
+        188,
+        850,
+        282
+      ],
+      "z_index": 25,
+      "animation_hint": "intro stagger fade 60-90ms",
+      "code_render_text_recommended": true,
+      "notes": "Reference only; greeting/date/term must be dynamic code text.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "paper_texture_3840x2160",
+      "type": "background",
+      "file": "07_background_decor/paper_texture_3840x2160.png",
+      "source_bbox_px": null,
+      "normalized_rect": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "design_rect_3840x2160": [
+        0,
+        0,
+        3840,
+        2160
+      ],
+      "z_index": 0,
+      "animation_hint": "static; time-of-day ink tone may modulate 2-5%",
+      "code_render_text_recommended": false,
+      "notes": "Reconstructed neutral paper texture inspired by the source background.",
+      "source_limitations": "Procedural reconstruction; not a literal extracted layer."
+    },
+    {
+      "id": "bottom_left_books_flowers",
+      "type": "foreground",
+      "file": "08_bottom_objects/bottom_left_books_flowers.png",
+      "source_bbox_px": [
+        0,
+        755,
+        610,
+        941
+      ],
+      "normalized_rect": [
+        0.0,
+        0.802338,
+        0.364833,
+        0.197662
+      ],
+      "design_rect_3840x2160": [
+        0,
+        1733,
+        1401,
+        427
+      ],
+      "z_index": 8,
+      "animation_hint": "parallax +4..7px; idle paper edge sway",
+      "code_render_text_recommended": false,
+      "notes": "Foreground books, pages and flowers.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "bottom_right_books_fan",
+      "type": "foreground",
+      "file": "08_bottom_objects/bottom_right_books_fan.png",
+      "source_bbox_px": [
+        1120,
+        750,
+        1672,
+        941
+      ],
+      "normalized_rect": [
+        0.669856,
+        0.797024,
+        0.330144,
+        0.202976
+      ],
+      "design_rect_3840x2160": [
+        2572,
+        1722,
+        1268,
+        438
+      ],
+      "z_index": 8,
+      "animation_hint": "parallax +4..7px; fan stays static, tassels can sway",
+      "code_render_text_recommended": false,
+      "notes": "Foreground fan/books/flowers.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "bottom_center_motto_reference",
+      "type": "reference",
+      "file": "08_bottom_objects/bottom_center_motto_reference.png",
+      "source_bbox_px": [
+        640,
+        820,
+        1090,
+        920
+      ],
+      "normalized_rect": [
+        0.382775,
+        0.871413,
+        0.269139,
+        0.10627
+      ],
+      "design_rect_3840x2160": [
+        1470,
+        1882,
+        1033,
+        230
+      ],
+      "z_index": 8,
+      "animation_hint": "intro fade after center cards",
+      "code_render_text_recommended": true,
+      "notes": "Motto placement reference; render motto in code.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "icon_course_book",
+      "type": "icon",
+      "file": "09_icons/png/icon_course_book.png",
+      "source_bbox_px": [
+        145,
+        272,
+        228,
+        332
+      ],
+      "normalized_rect": [
+        0.086722,
+        0.289054,
+        0.049641,
+        0.063762
+      ],
+      "design_rect_3840x2160": [
+        333,
+        624,
+        191,
+        138
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_course_book.svg"
+    },
+    {
+      "id": "icon_calendar",
+      "type": "icon",
+      "file": "09_icons/png/icon_calendar.png",
+      "source_bbox_px": [
+        155,
+        421,
+        226,
+        487
+      ],
+      "normalized_rect": [
+        0.092703,
+        0.447396,
+        0.042464,
+        0.070138
+      ],
+      "design_rect_3840x2160": [
+        356,
+        966,
+        163,
+        151
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_calendar.svg"
+    },
+    {
+      "id": "icon_assignment",
+      "type": "icon",
+      "file": "09_icons/png/icon_assignment.png",
+      "source_bbox_px": [
+        125,
+        548,
+        195,
+        622
+      ],
+      "normalized_rect": [
+        0.074761,
+        0.582359,
+        0.041866,
+        0.07864
+      ],
+      "design_rect_3840x2160": [
+        287,
+        1258,
+        161,
+        170
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_assignment.svg"
+    },
+    {
+      "id": "icon_flashcards",
+      "type": "icon",
+      "file": "09_icons/png/icon_flashcards.png",
+      "source_bbox_px": [
+        130,
+        690,
+        207,
+        758
+      ],
+      "normalized_rect": [
+        0.077751,
+        0.733262,
+        0.046053,
+        0.072264
+      ],
+      "design_rect_3840x2160": [
+        299,
+        1584,
+        177,
+        156
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_flashcards.svg"
+    },
+    {
+      "id": "icon_writing_quill",
+      "type": "icon",
+      "file": "09_icons/png/icon_writing_quill.png",
+      "source_bbox_px": [
+        1245,
+        267,
+        1321,
+        334
+      ],
+      "normalized_rect": [
+        0.744617,
+        0.283741,
+        0.045455,
+        0.071201
+      ],
+      "design_rect_3840x2160": [
+        2859,
+        613,
+        175,
+        154
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_writing_quill.svg"
+    },
+    {
+      "id": "icon_exam",
+      "type": "icon",
+      "file": "09_icons/png/icon_exam.png",
+      "source_bbox_px": [
+        1264,
+        420,
+        1337,
+        493
+      ],
+      "normalized_rect": [
+        0.755981,
+        0.446334,
+        0.04366,
+        0.077577
+      ],
+      "design_rect_3840x2160": [
+        2903,
+        964,
+        168,
+        168
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_exam.svg"
+    },
+    {
+      "id": "icon_mail",
+      "type": "icon",
+      "file": "09_icons/png/icon_mail.png",
+      "source_bbox_px": [
+        1261,
+        554,
+        1331,
+        622
+      ],
+      "normalized_rect": [
+        0.754187,
+        0.588735,
+        0.041866,
+        0.072264
+      ],
+      "design_rect_3840x2160": [
+        2896,
+        1272,
+        161,
+        156
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_mail.svg"
+    },
+    {
+      "id": "icon_originality_scroll",
+      "type": "icon",
+      "file": "09_icons/png/icon_originality_scroll.png",
+      "source_bbox_px": [
+        1255,
+        688,
+        1335,
+        760
+      ],
+      "normalized_rect": [
+        0.750598,
+        0.731137,
+        0.047847,
+        0.076514
+      ],
+      "design_rect_3840x2160": [
+        2882,
+        1579,
+        184,
+        165
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_originality_scroll.svg"
+    },
+    {
+      "id": "icon_daily_sun",
+      "type": "icon",
+      "file": "09_icons/png/icon_daily_sun.png",
+      "source_bbox_px": [
+        647,
+        617,
+        710,
+        685
+      ],
+      "normalized_rect": [
+        0.386962,
+        0.655685,
+        0.037679,
+        0.072264
+      ],
+      "design_rect_3840x2160": [
+        1486,
+        1416,
+        145,
+        156
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_daily_sun.svg"
+    },
+    {
+      "id": "icon_grade_chart",
+      "type": "icon",
+      "file": "09_icons/png/icon_grade_chart.png",
+      "source_bbox_px": [
+        648,
+        723,
+        711,
+        789
+      ],
+      "normalized_rect": [
+        0.38756,
+        0.768332,
+        0.037679,
+        0.070138
+      ],
+      "design_rect_3840x2160": [
+        1488,
+        1660,
+        145,
+        151
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_grade_chart.svg"
+    },
+    {
+      "id": "icon_search",
+      "type": "icon",
+      "file": "09_icons/png/icon_search.png",
+      "source_bbox_px": [
+        1038,
+        37,
+        1066,
+        65
+      ],
+      "normalized_rect": [
+        0.620813,
+        0.03932,
+        0.016746,
+        0.029756
+      ],
+      "design_rect_3840x2160": [
+        2384,
+        85,
+        64,
+        64
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_search.svg"
+    },
+    {
+      "id": "icon_bell",
+      "type": "icon",
+      "file": "09_icons/png/icon_bell.png",
+      "source_bbox_px": [
+        1322,
+        33,
+        1356,
+        69
+      ],
+      "normalized_rect": [
+        0.79067,
+        0.035069,
+        0.020335,
+        0.038257
+      ],
+      "design_rect_3840x2160": [
+        3036,
+        76,
+        78,
+        83
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_bell.svg"
+    },
+    {
+      "id": "icon_settings",
+      "type": "icon",
+      "file": "09_icons/png/icon_settings.png",
+      "source_bbox_px": [
+        1374,
+        31,
+        1410,
+        70
+      ],
+      "normalized_rect": [
+        0.82177,
+        0.032944,
+        0.021531,
+        0.041445
+      ],
+      "design_rect_3840x2160": [
+        3156,
+        71,
+        83,
+        90
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_settings.svg"
+    },
+    {
+      "id": "icon_arrow_left_panel",
+      "type": "icon",
+      "file": "09_icons/png/icon_arrow_left_panel.png",
+      "source_bbox_px": [
+        383,
+        298,
+        426,
+        337
+      ],
+      "normalized_rect": [
+        0.229067,
+        0.316684,
+        0.025718,
+        0.041445
+      ],
+      "design_rect_3840x2160": [
+        880,
+        684,
+        99,
+        90
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_arrow_left_panel.svg"
+    },
+    {
+      "id": "icon_arrow_right_panel",
+      "type": "icon",
+      "file": "09_icons/png/icon_arrow_right_panel.png",
+      "source_bbox_px": [
+        1480,
+        295,
+        1520,
+        336
+      ],
+      "normalized_rect": [
+        0.885167,
+        0.313496,
+        0.023923,
+        0.043571
+      ],
+      "design_rect_3840x2160": [
+        3399,
+        677,
+        92,
+        94
+      ],
+      "z_index": 20,
+      "animation_hint": "hover: translateY(-2px), scale(1.02), 140ms ease-out",
+      "code_render_text_recommended": false,
+      "notes": "",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers.",
+      "svg_file": "09_icons/svg/icon_arrow_right_panel.svg"
+    },
+    {
+      "id": "decor_butterfly_top",
+      "type": "butterfly",
+      "file": "10_small_decor/decor_butterfly_top.png",
+      "source_bbox_px": [
+        916,
+        36,
+        982,
+        102
+      ],
+      "normalized_rect": [
+        0.547847,
+        0.038257,
+        0.039474,
+        0.070138
+      ],
+      "design_rect_3840x2160": [
+        2104,
+        83,
+        152,
+        151
+      ],
+      "z_index": 18,
+      "animation_hint": "idle wing flap 2-3deg / rare fly-by",
+      "code_render_text_recommended": false,
+      "notes": "Can be used as rare fly-by sprite.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_butterfly_left",
+      "type": "butterfly",
+      "file": "10_small_decor/decor_butterfly_left.png",
+      "source_bbox_px": [
+        431,
+        247,
+        480,
+        297
+      ],
+      "normalized_rect": [
+        0.257775,
+        0.262487,
+        0.029306,
+        0.053135
+      ],
+      "design_rect_3840x2160": [
+        990,
+        567,
+        113,
+        115
+      ],
+      "z_index": 18,
+      "animation_hint": "rare 20-60s micro motion",
+      "code_render_text_recommended": false,
+      "notes": "Small left-side butterfly.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_top_left_flower_cluster",
+      "type": "flower_cluster",
+      "file": "10_small_decor/decor_top_left_flower_cluster.png",
+      "source_bbox_px": [
+        0,
+        0,
+        158,
+        92
+      ],
+      "normalized_rect": [
+        0.0,
+        0.0,
+        0.094498,
+        0.097768
+      ],
+      "design_rect_3840x2160": [
+        0,
+        0,
+        363,
+        211
+      ],
+      "z_index": 18,
+      "animation_hint": "static or 0.5px sway",
+      "code_render_text_recommended": false,
+      "notes": "Top-left floral cluster.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_top_hanging_tassel",
+      "type": "tassel",
+      "file": "10_small_decor/decor_top_hanging_tassel.png",
+      "source_bbox_px": [
+        301,
+        0,
+        361,
+        110
+      ],
+      "normalized_rect": [
+        0.180024,
+        0.0,
+        0.035885,
+        0.116897
+      ],
+      "design_rect_3840x2160": [
+        691,
+        0,
+        138,
+        252
+      ],
+      "z_index": 18,
+      "animation_hint": "delayed pendulum 1-2deg",
+      "code_render_text_recommended": false,
+      "notes": "Top hanging ornament.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_left_panel_tassel",
+      "type": "tassel",
+      "file": "10_small_decor/decor_left_panel_tassel.png",
+      "source_bbox_px": [
+        73,
+        246,
+        120,
+        399
+      ],
+      "normalized_rect": [
+        0.04366,
+        0.261424,
+        0.02811,
+        0.162593
+      ],
+      "design_rect_3840x2160": [
+        168,
+        565,
+        108,
+        351
+      ],
+      "z_index": 18,
+      "animation_hint": "secondary motion after panel hover",
+      "code_render_text_recommended": false,
+      "notes": "Left wing hanging tassel.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_right_panel_tassel",
+      "type": "tassel",
+      "file": "10_small_decor/decor_right_panel_tassel.png",
+      "source_bbox_px": [
+        1510,
+        245,
+        1560,
+        402
+      ],
+      "normalized_rect": [
+        0.90311,
+        0.260361,
+        0.029904,
+        0.166844
+      ],
+      "design_rect_3840x2160": [
+        3468,
+        562,
+        115,
+        360
+      ],
+      "z_index": 18,
+      "animation_hint": "secondary motion after panel hover",
+      "code_render_text_recommended": false,
+      "notes": "Right wing hanging tassel.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_corner_flower_bottom_left",
+      "type": "flower_cluster",
+      "file": "10_small_decor/decor_corner_flower_bottom_left.png",
+      "source_bbox_px": [
+        0,
+        675,
+        125,
+        820
+      ],
+      "normalized_rect": [
+        0.0,
+        0.717322,
+        0.074761,
+        0.154091
+      ],
+      "design_rect_3840x2160": [
+        0,
+        1549,
+        287,
+        333
+      ],
+      "z_index": 18,
+      "animation_hint": "foreground parallax",
+      "code_render_text_recommended": false,
+      "notes": "Bottom-left edge flower cluster.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    },
+    {
+      "id": "decor_corner_flower_bottom_right",
+      "type": "flower_cluster",
+      "file": "10_small_decor/decor_corner_flower_bottom_right.png",
+      "source_bbox_px": [
+        1545,
+        670,
+        1672,
+        824
+      ],
+      "normalized_rect": [
+        0.924043,
+        0.712009,
+        0.075957,
+        0.163656
+      ],
+      "design_rect_3840x2160": [
+        3548,
+        1538,
+        292,
+        353
+      ],
+      "z_index": 18,
+      "animation_hint": "foreground parallax",
+      "code_render_text_recommended": false,
+      "notes": "Bottom-right edge flower cluster.",
+      "source_limitations": "Source is a flattened raster. Hidden/occluded pixels cannot be perfectly recovered without original layers."
+    }
+  ]
+}

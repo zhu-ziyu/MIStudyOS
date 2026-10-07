@@ -1,0 +1,190 @@
+[
+  {
+    "t": "0.00-0.35",
+    "phase": "Paper Wake",
+    "elements": [
+      "paper_texture"
+    ],
+    "motion": "opacity 0→1; contrast 0.94→1.00",
+    "easing": "easeOutQuad"
+  },
+  {
+    "t": "0.18-0.75",
+    "phase": "Distant Ink",
+    "elements": [
+      "top branches",
+      "edge frames",
+      "bottom foreground silhouettes"
+    ],
+    "motion": "very light line reveal + 2px parallax settle",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "0.45-1.10",
+    "phase": "Brand Seed",
+    "elements": [
+      "宓语 StudyOS title zone"
+    ],
+    "motion": "ink-write left→right; subtitle delayed 100ms",
+    "easing": "linear stroke + easeOut"
+  },
+  {
+    "t": "0.70-3.15",
+    "phase": "Mi Draw-In",
+    "elements": [
+      "central character (existing asset)"
+    ],
+    "motion": "grouped line reveal: silhouette→hair mass→face/eyes→hand/pen→clothes→flowers/tassels; final 15% crossfade to master art",
+    "easing": "custom ink reveal"
+  },
+  {
+    "t": "1.40-2.30",
+    "phase": "Top Bar",
+    "elements": [
+      "search",
+      "bell",
+      "settings",
+      "avatar"
+    ],
+    "motion": "stagger 70ms; text 2px up + fade",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "1.85-2.65",
+    "phase": "Greeting",
+    "elements": [
+      "Good Morning",
+      "date",
+      "term"
+    ],
+    "motion": "three-line stagger; no scale",
+    "easing": "easeOutQuad"
+  },
+  {
+    "t": "2.35-2.85",
+    "phase": "Mi First Life",
+    "elements": [
+      "eyes",
+      "front hair",
+      "tassel"
+    ],
+    "motion": "first tiny gaze shift + hair settle; no blink yet",
+    "easing": "spring critically damped"
+  },
+  {
+    "t": "2.70-3.35",
+    "phase": "Wing Root",
+    "elements": [
+      "left/right main branch roots"
+    ],
+    "motion": "draw from character outward; left/right alternate by 80ms",
+    "easing": "easeInOutSine"
+  },
+  {
+    "t": "3.10-3.55",
+    "phase": "Wing 1",
+    "elements": [
+      "Course Hub",
+      "Writing Studio"
+    ],
+    "motion": "frame stroke reveal→icon 100ms→label 70ms→arrow 50ms; tassel follow 180ms",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "3.45-3.90",
+    "phase": "Wing 2",
+    "elements": [
+      "Smart Calendar",
+      "Exam & Mistake Center"
+    ],
+    "motion": "same pattern; opposite side starts 70ms later",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "3.80-4.25",
+    "phase": "Wing 3",
+    "elements": [
+      "Assignment Workspace",
+      "Campus Inbox"
+    ],
+    "motion": "same pattern",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "4.15-4.65",
+    "phase": "Wing 4",
+    "elements": [
+      "Flashcards",
+      "Originality Studio"
+    ],
+    "motion": "same pattern; decorative leaves finish last",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "4.55-5.15",
+    "phase": "Core Card 1",
+    "elements": [
+      "Daily Dashboard"
+    ],
+    "motion": "translateY 10→0px + opacity; frame draws 160ms; icon/text settle",
+    "easing": "easeOutBack with overshoot < 0.3%"
+  },
+  {
+    "t": "4.82-5.42",
+    "phase": "Core Card 2",
+    "elements": [
+      "Grade Tracker"
+    ],
+    "motion": "same, delayed 270ms",
+    "easing": "easeOutBack with overshoot < 0.3%"
+  },
+  {
+    "t": "5.20-5.65",
+    "phase": "Foreground Settle",
+    "elements": [
+      "bottom books",
+      "fan",
+      "flowers",
+      "tassels"
+    ],
+    "motion": "2-4px settle; tassels continue 250ms",
+    "easing": "spring"
+  },
+  {
+    "t": "5.55-6.15",
+    "phase": "Dialogue Frame",
+    "elements": [
+      "Mi greeting bubble"
+    ],
+    "motion": "frame outline draw→paper wash 8%→text reveal",
+    "easing": "easeOutCubic"
+  },
+  {
+    "t": "6.05-6.38",
+    "phase": "First Blink",
+    "elements": [
+      "Mi eyes"
+    ],
+    "motion": "natural blink 130ms close / 70ms hold / 130ms open",
+    "easing": "easeInOutSine"
+  },
+  {
+    "t": "6.25-6.80",
+    "phase": "Final Settle",
+    "elements": [
+      "all UI"
+    ],
+    "motion": "parallax targets zero; residual tassel/flower movement fades",
+    "easing": "critically damped"
+  },
+  {
+    "t": "6.80+",
+    "phase": "Idle",
+    "elements": [
+      "Mi",
+      "decor"
+    ],
+    "motion": "breathing, gaze, hair inertia, low-frequency ambient branch motion, 1-8px layered parallax",
+    "easing": "state-driven"
+  }
+]

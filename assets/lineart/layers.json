@@ -1,0 +1,335 @@
+{
+  "design_size": [
+    1672,
+    982
+  ],
+  "renderer": "Tk Canvas + native Text/Entry",
+  "layers": [
+    {
+      "id": "architecture",
+      "source": "07_4k_png_exports/decoration_svg__mountain_ink_outline_4k.png",
+      "crop": null,
+      "design_rect": [
+        30,
+        193,
+        350,
+        100
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "architecture",
+      "source": "07_4k_png_exports/decoration_svg__pagoda_lineart_4k.png",
+      "crop": null,
+      "design_rect": [
+        1278,
+        76,
+        164,
+        118
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "character",
+      "source": "01_character/character_transparent_4k.png",
+      "crop": null,
+      "design_rect": [
+        -87,
+        34,
+        764,
+        1019
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "ornaments",
+      "source": "02_ornaments/books_sakura_scroll_hourglass_full_4k.png",
+      "crop": null,
+      "design_rect": [
+        -66,
+        612,
+        657,
+        493
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "tabs",
+      "source": "07_4k_png_exports/panels_svg__tab_sheet_4_4k.png",
+      "crop": null,
+      "design_rect": [
+        650,
+        283,
+        955,
+        56
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "panels",
+      "source": "07_4k_png_exports/panels_svg__main_essay_parchment_frame_4k.png",
+      "crop": null,
+      "design_rect": [
+        650,
+        332,
+        948,
+        577
+      ],
+      "visible_group": "settings",
+      "interactive": false
+    },
+    {
+      "id": "top_vines",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        0,
+        0,
+        570,
+        320
+      ],
+      "design_rect": [
+        0,
+        0,
+        570,
+        320
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "fan",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        570,
+        0,
+        1414,
+        314
+      ],
+      "design_rect": [
+        570,
+        0,
+        844,
+        314
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "status",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        1414,
+        0,
+        1672,
+        334
+      ],
+      "design_rect": [
+        1414,
+        0,
+        258,
+        334
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "parchment",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        560,
+        314,
+        1672,
+        551
+      ],
+      "design_rect": [
+        560,
+        314,
+        1112,
+        237
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "settings_frame",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        560,
+        551,
+        1672,
+        692
+      ],
+      "design_rect": [
+        560,
+        551,
+        1112,
+        141
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "workflow_frame",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        490,
+        692,
+        1672,
+        810
+      ],
+      "design_rect": [
+        490,
+        692,
+        1182,
+        118
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "docs_frame",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        490,
+        810,
+        1672,
+        941
+      ],
+      "design_rect": [
+        490,
+        810,
+        1182,
+        131
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "left_ribbons",
+      "source": "10_reference_derived/ornamental_framework.png",
+      "crop": [
+        0,
+        320,
+        560,
+        941
+      ],
+      "design_rect": [
+        0,
+        320,
+        560,
+        621
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_bell_4k.png",
+      "crop": null,
+      "design_rect": [
+        1420,
+        25,
+        26,
+        28
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "crop": null,
+      "design_rect": [
+        24,
+        48,
+        32,
+        53
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "avatar",
+      "source": "01_character/character_portrait_transparent_4k.png",
+      "crop": null,
+      "design_rect": [
+        1462,
+        13,
+        57,
+        62
+      ],
+      "visible_group": "all",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "crop": null,
+      "design_rect": [
+        678,
+        348,
+        24,
+        34
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "crop": null,
+      "design_rect": [
+        678,
+        563,
+        23,
+        30
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "crop": null,
+      "design_rect": [
+        1060,
+        563,
+        23,
+        30
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "crop": null,
+      "design_rect": [
+        552,
+        710,
+        24,
+        31
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    },
+    {
+      "id": "icons",
+      "source": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "crop": null,
+      "design_rect": [
+        568,
+        844,
+        24,
+        28
+      ],
+      "visible_group": "essay",
+      "interactive": false
+    }
+  ]
+}

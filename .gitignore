@@ -1,0 +1,10 @@
+node_modules/
+.venv/
+.desktop-env/
+.studyos-data/
+build/
+dist/
+__pycache__/
+artifacts/
+*.log
+*.zip

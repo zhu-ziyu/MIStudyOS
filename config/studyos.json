@@ -1,0 +1,9 @@
+{
+  "writingStudio": {
+    "entryPath": null,
+    "pythonExecutable": null,
+    "url": null,
+    "mode": "embedded",
+    "description": "原生 Python/EXE 项目使用 entryPath 与 pythonExecutable 接入，保留原功能源码与资产库；Web 工作台可使用 url 接入。"
+  }
+}

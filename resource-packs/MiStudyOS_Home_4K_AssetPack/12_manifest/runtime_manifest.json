@@ -1,0 +1,940 @@
+{
+  "package": "MiStudyOS Home — corrected runtime layers",
+  "version": "1.1",
+  "source_size": [
+    1672,
+    941
+  ],
+  "design_size": [
+    3840,
+    2160
+  ],
+  "notes": [
+    "The original supplied 4K PNG package and its manifest remain unchanged.",
+    "This supplementary manifest uses coordinates verified against the actual reference.",
+    "SVG frame/icon wrappers contain raster images and masks; reusable_vector entries are actual existing vector paths.",
+    "Visible art can be split; hidden/occluded art and original native 4K details cannot be recovered from flattened pixels."
+  ],
+  "assets": [
+    {
+      "id": "course_frame",
+      "file": "14_runtime_svg/course_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        72,
+        211,
+        521,
+        391
+      ],
+      "recommended_position": [
+        0.0430622009569378,
+        0.22422954303931988,
+        0.26854066985645936,
+        0.19128586609989373
+      ],
+      "design_rect_3840x2160": [
+        165,
+        484,
+        1031,
+        413
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        449,
+        180
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "course_icon",
+      "file": "14_runtime_svg/course_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        192,
+        275,
+        268,
+        343
+      ],
+      "recommended_position": [
+        0.11483253588516747,
+        0.2922422954303932,
+        0.045454545454545456,
+        0.07226354941551541
+      ],
+      "design_rect_3840x2160": [
+        441,
+        631,
+        175,
+        156
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        76,
+        68
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "calendar_frame",
+      "file": "14_runtime_svg/calendar_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        47,
+        359,
+        518,
+        543
+      ],
+      "recommended_position": [
+        0.028110047846889953,
+        0.38150903294367694,
+        0.28169856459330145,
+        0.19553666312433582
+      ],
+      "design_rect_3840x2160": [
+        108,
+        824,
+        1082,
+        422
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        471,
+        184
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "calendar_icon",
+      "file": "14_runtime_svg/calendar_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        183,
+        417,
+        242,
+        479
+      ],
+      "recommended_position": [
+        0.10944976076555024,
+        0.44314558979808716,
+        0.035287081339712915,
+        0.06588735387885228
+      ],
+      "design_rect_3840x2160": [
+        420,
+        957,
+        136,
+        142
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        59,
+        62
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "assignment_frame",
+      "file": "14_runtime_svg/assignment_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        43,
+        509,
+        526,
+        692
+      ],
+      "recommended_position": [
+        0.025717703349282296,
+        0.5409139213602551,
+        0.2888755980861244,
+        0.1944739638682253
+      ],
+      "design_rect_3840x2160": [
+        99,
+        1168,
+        1109,
+        420
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        483,
+        183
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "assignment_icon",
+      "file": "14_runtime_svg/assignment_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        127,
+        551,
+        195,
+        639
+      ],
+      "recommended_position": [
+        0.07595693779904306,
+        0.5855472901168969,
+        0.04066985645933014,
+        0.09351753453772582
+      ],
+      "design_rect_3840x2160": [
+        292,
+        1265,
+        156,
+        202
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        68,
+        88
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "flashcards_frame",
+      "file": "14_runtime_svg/flashcards_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        63,
+        650,
+        540,
+        855
+      ],
+      "recommended_position": [
+        0.037679425837320576,
+        0.6907545164718385,
+        0.2852870813397129,
+        0.21785334750265675
+      ],
+      "design_rect_3840x2160": [
+        145,
+        1492,
+        1096,
+        471
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        477,
+        205
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "flashcards_icon",
+      "file": "14_runtime_svg/flashcards_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        197,
+        693,
+        270,
+        765
+      ],
+      "recommended_position": [
+        0.11782296650717704,
+        0.7364505844845909,
+        0.04366028708133971,
+        0.0765143464399575
+      ],
+      "design_rect_3840x2160": [
+        452,
+        1591,
+        168,
+        165
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        73,
+        72
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "writing_frame",
+      "file": "14_runtime_svg/writing_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        1181,
+        212,
+        1608,
+        410
+      ],
+      "recommended_position": [
+        0.7063397129186603,
+        0.2252922422954304,
+        0.2553827751196172,
+        0.2104144527098831
+      ],
+      "design_rect_3840x2160": [
+        2712,
+        487,
+        981,
+        454
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        427,
+        198
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "writing_icon",
+      "file": "14_runtime_svg/writing_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        1263,
+        269,
+        1339,
+        359
+      ],
+      "recommended_position": [
+        0.7553827751196173,
+        0.2858660998937301,
+        0.045454545454545456,
+        0.09564293304994687
+      ],
+      "design_rect_3840x2160": [
+        2901,
+        617,
+        175,
+        207
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        76,
+        90
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "exam_frame",
+      "file": "14_runtime_svg/exam_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        1180,
+        359,
+        1616,
+        544
+      ],
+      "recommended_position": [
+        0.7057416267942583,
+        0.38150903294367694,
+        0.2607655502392344,
+        0.19659936238044634
+      ],
+      "design_rect_3840x2160": [
+        2710,
+        824,
+        1001,
+        425
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        436,
+        185
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "exam_icon",
+      "file": "14_runtime_svg/exam_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        1272,
+        427,
+        1340,
+        506
+      ],
+      "recommended_position": [
+        0.7607655502392344,
+        0.4537725823591923,
+        0.04066985645933014,
+        0.08395324123273114
+      ],
+      "design_rect_3840x2160": [
+        2921,
+        980,
+        156,
+        181
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        68,
+        79
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "inbox_frame",
+      "file": "14_runtime_svg/inbox_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        1183,
+        511,
+        1620,
+        694
+      ],
+      "recommended_position": [
+        0.7075358851674641,
+        0.5430393198724761,
+        0.26136363636363635,
+        0.1944739638682253
+      ],
+      "design_rect_3840x2160": [
+        2717,
+        1173,
+        1004,
+        420
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        437,
+        183
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "inbox_icon",
+      "file": "14_runtime_svg/inbox_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        1289,
+        554,
+        1360,
+        643
+      ],
+      "recommended_position": [
+        0.770933014354067,
+        0.5887353878852285,
+        0.042464114832535885,
+        0.09458023379383634
+      ],
+      "design_rect_3840x2160": [
+        2960,
+        1272,
+        163,
+        204
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        71,
+        89
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "originality_frame",
+      "file": "14_runtime_svg/originality_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        1181,
+        652,
+        1611,
+        856
+      ],
+      "recommended_position": [
+        0.7063397129186603,
+        0.6928799149840595,
+        0.25717703349282295,
+        0.21679064824654623
+      ],
+      "design_rect_3840x2160": [
+        2712,
+        1497,
+        988,
+        468
+      ],
+      "z_index": 15,
+      "animation_hint": "grow from wing root, then settle 2px",
+      "safe_area": [
+        0,
+        0,
+        430,
+        204
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "originality_icon",
+      "file": "14_runtime_svg/originality_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        1269,
+        688,
+        1340,
+        787
+      ],
+      "recommended_position": [
+        0.7589712918660287,
+        0.7311370882040382,
+        0.042464114832535885,
+        0.10520722635494155
+      ],
+      "design_rect_3840x2160": [
+        2914,
+        1579,
+        163,
+        227
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        71,
+        99
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "daily_frame",
+      "file": "14_runtime_svg/daily_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        544,
+        589,
+        1127,
+        731
+      ],
+      "recommended_position": [
+        0.3253588516746411,
+        0.6259298618490967,
+        0.34868421052631576,
+        0.15090329436769395
+      ],
+      "design_rect_3840x2160": [
+        1249,
+        1352,
+        1339,
+        326
+      ],
+      "z_index": 15,
+      "animation_hint": "fade up 6px",
+      "safe_area": [
+        0,
+        0,
+        583,
+        142
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "daily_icon",
+      "file": "14_runtime_svg/daily_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        668,
+        627,
+        726,
+        688
+      ],
+      "recommended_position": [
+        0.39952153110047844,
+        0.6663124335812965,
+        0.034688995215311005,
+        0.06482465462274177
+      ],
+      "design_rect_3840x2160": [
+        1534,
+        1439,
+        133,
+        140
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        58,
+        61
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "grades_frame",
+      "file": "14_runtime_svg/grades_frame.svg",
+      "category": "frame",
+      "source_bbox_px": [
+        546,
+        701,
+        1126,
+        846
+      ],
+      "recommended_position": [
+        0.326555023923445,
+        0.7449521785334751,
+        0.34688995215311,
+        0.15409139213602552
+      ],
+      "design_rect_3840x2160": [
+        1254,
+        1609,
+        1332,
+        333
+      ],
+      "z_index": 15,
+      "animation_hint": "fade up 6px",
+      "safe_area": [
+        0,
+        0,
+        580,
+        145
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "grades_icon",
+      "file": "14_runtime_svg/grades_icon.svg",
+      "category": "icon",
+      "source_bbox_px": [
+        673,
+        737,
+        722,
+        797
+      ],
+      "recommended_position": [
+        0.40251196172248804,
+        0.7832093517534537,
+        0.02930622009569378,
+        0.06376195536663125
+      ],
+      "design_rect_3840x2160": [
+        1546,
+        1692,
+        113,
+        138
+      ],
+      "z_index": 16,
+      "animation_hint": "fade 130ms after frame; hover scale 1.02",
+      "safe_area": [
+        0,
+        0,
+        49,
+        60
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "dialog_frame",
+      "file": "14_runtime_svg/dialog_frame.svg",
+      "category": "dialog",
+      "source_bbox_px": [
+        985,
+        136,
+        1319,
+        287
+      ],
+      "recommended_position": [
+        0.5891148325358851,
+        0.14452709883103082,
+        0.19976076555023922,
+        0.16046758767268862
+      ],
+      "design_rect_3840x2160": [
+        2262,
+        312,
+        767,
+        347
+      ],
+      "z_index": 15,
+      "animation_hint": "border reveal, then DOM text",
+      "safe_area": [
+        0,
+        0,
+        334,
+        151
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "avatar_reference",
+      "file": "14_runtime_svg/avatar_reference.svg",
+      "category": "avatar",
+      "source_bbox_px": [
+        1450,
+        23,
+        1519,
+        92
+      ],
+      "recommended_position": [
+        0.8672248803827751,
+        0.024442082890541977,
+        0.04126794258373206,
+        0.07332624867162593
+      ],
+      "design_rect_3840x2160": [
+        3330,
+        53,
+        158,
+        158
+      ],
+      "z_index": 15,
+      "animation_hint": "fade; hover 1px",
+      "safe_area": [
+        0,
+        0,
+        69,
+        69
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "top_left_branches",
+      "file": "14_runtime_svg/top_left_branches.svg",
+      "category": "decor",
+      "source_bbox_px": [
+        0,
+        0,
+        655,
+        213
+      ],
+      "recommended_position": [
+        0,
+        0,
+        0.39174641148325356,
+        0.2263549415515409
+      ],
+      "design_rect_3840x2160": [
+        0,
+        0,
+        1504,
+        489
+      ],
+      "z_index": 15,
+      "animation_hint": "scenery fade",
+      "safe_area": [
+        0,
+        0,
+        655,
+        213
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "bottom_left_books",
+      "file": "14_runtime_svg/bottom_left_books.svg",
+      "category": "foreground",
+      "source_bbox_px": [
+        0,
+        769,
+        551,
+        941
+      ],
+      "recommended_position": [
+        0,
+        0.8172157279489904,
+        0.32954545454545453,
+        0.18278427205100956
+      ],
+      "design_rect_3840x2160": [
+        0,
+        1765,
+        1265,
+        395
+      ],
+      "z_index": 15,
+      "animation_hint": "settle after core cards",
+      "safe_area": [
+        0,
+        0,
+        551,
+        172
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "bottom_right_fan",
+      "file": "14_runtime_svg/bottom_right_fan.svg",
+      "category": "foreground",
+      "source_bbox_px": [
+        1130,
+        778,
+        1672,
+        941
+      ],
+      "recommended_position": [
+        0.6758373205741627,
+        0.8267800212539851,
+        0.3241626794258373,
+        0.17321997874601489
+      ],
+      "design_rect_3840x2160": [
+        2595,
+        1786,
+        1245,
+        374
+      ],
+      "z_index": 15,
+      "animation_hint": "settle after core cards",
+      "safe_area": [
+        0,
+        0,
+        542,
+        163
+      ],
+      "notes": "Reference-based raster image in an SVG mask; preserve the neighboring 00_reference directory. Code-rendered labels are separate."
+    },
+    {
+      "id": "reusable_sakura_flower",
+      "file": "15_reusable_decor/sakura_flower.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_sakura_branch_horizontal",
+      "file": "15_reusable_decor/sakura_branch_horizontal.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_hanging_tassel",
+      "file": "15_reusable_decor/hanging_tassel.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "delayed sway 0.5deg; fixed upper pivot",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_hanging_flower_charm",
+      "file": "15_reusable_decor/hanging_flower_charm.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_butterfly_lineart",
+      "file": "15_reusable_decor/butterfly_lineart.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_corner_flower_vine",
+      "file": "15_reusable_decor/corner_flower_vine.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_corner_scroll_leaf",
+      "file": "15_reusable_decor/corner_scroll_leaf.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_decorative_ribbon_swirl",
+      "file": "15_reusable_decor/decorative_ribbon_swirl.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_mountain_ink_outline",
+      "file": "15_reusable_decor/mountain_ink_outline.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_pagoda_lineart",
+      "file": "15_reusable_decor/pagoda_lineart.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_wind_swirls",
+      "file": "15_reusable_decor/wind_swirls.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    },
+    {
+      "id": "reusable_floating_feather",
+      "file": "15_reusable_decor/floating_feather.svg",
+      "category": "reusable_vector",
+      "recommended_position": null,
+      "z_index": 5,
+      "animation_hint": "local low-frequency motion only",
+      "safe_area": null,
+      "notes": "Copied unchanged from the existing assets/lineart vector library; suggested supporting artwork, not claimed as extracted hidden pixels."
+    }
+  ]
+}

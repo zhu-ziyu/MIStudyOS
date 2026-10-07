@@ -1,0 +1,818 @@
+{
+  "origin": {
+    "legacy": "00_reference/legacy_ui_v037.png",
+    "target": "00_reference/target_design_v037.png",
+    "image_dimensions": {
+      "legacy": [
+        1215,
+        1005
+      ],
+      "target": [
+        1672,
+        941
+      ]
+    }
+  },
+  "honesty": "Merged source image is not layered. 4K character/decor are re-sampled from earlier standalone illustrations; vector SVG assets are redrawn independently.",
+  "primary_assets": {
+    "character": "01_character/character_transparent_4k.png",
+    "portrait": "01_character/character_portrait_transparent_4k.png",
+    "ornaments": "02_ornaments/books_sakura_scroll_hourglass_full_4k.png",
+    "fan": "03_fan_svg/fan_triptych_v037.svg",
+    "fan_left": "03_fan_svg/fan_petals_hover_left.svg",
+    "fan_center": "03_fan_svg/fan_petals_hover_center.svg",
+    "fan_right": "03_fan_svg/fan_petals_hover_right.svg",
+    "status": "03_fan_svg/fan_circular_status.svg",
+    "tabs": "04_panels_svg/tab_sheet_4.svg",
+    "essay_frame": "04_panels_svg/main_essay_parchment_frame.svg",
+    "settings_frame": "04_panels_svg/settings_dual_frame.svg",
+    "workflow_frame": "04_panels_svg/workflow_buttons_tray.svg",
+    "docs_frame": "04_panels_svg/doc_compatibility_tray.svg"
+  },
+  "svg_to_png_4k": [
+    {
+      "svg": "03_fan_svg/character_ui_connector_hairlines.svg",
+      "png": "07_4k_png_exports/fan_svg__character_ui_connector_hairlines_4k.png",
+      "resolution": [
+        4096,
+        867
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_circular_status.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_circular_status_4k.png",
+      "resolution": [
+        4022,
+        4096
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_flower_button.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_flower_button_4k.png",
+      "resolution": [
+        4096,
+        1189
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_left.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_left_4k.png",
+      "resolution": [
+        4096,
+        939
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_middle.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_middle_4k.png",
+      "resolution": [
+        4096,
+        939
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_navigation_3_slots.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_navigation_3_slots_4k.png",
+      "resolution": [
+        4096,
+        966
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_petals_hover_center.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_petals_hover_center_4k.png",
+      "resolution": [
+        4096,
+        1065
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_petals_hover_left.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_petals_hover_left_4k.png",
+      "resolution": [
+        4096,
+        1065
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_petals_hover_right.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_petals_hover_right_4k.png",
+      "resolution": [
+        4096,
+        1065
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_right.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_right_4k.png",
+      "resolution": [
+        4096,
+        939
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_selected_ink.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_selected_ink_4k.png",
+      "resolution": [
+        4096,
+        2642
+      ]
+    },
+    {
+      "svg": "03_fan_svg/fan_triptych_v037.svg",
+      "png": "07_4k_png_exports/fan_svg__fan_triptych_v037_4k.png",
+      "resolution": [
+        4096,
+        1065
+      ]
+    },
+    {
+      "svg": "04_panels_svg/analysis_panel_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__analysis_panel_frame_4k.png",
+      "resolution": [
+        4096,
+        2348
+      ]
+    },
+    {
+      "svg": "04_panels_svg/avatar_ring.svg",
+      "png": "07_4k_png_exports/panels_svg__avatar_ring_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "04_panels_svg/corner_flourishes.svg",
+      "png": "07_4k_png_exports/panels_svg__corner_flourishes_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "04_panels_svg/decorative_divider.svg",
+      "png": "07_4k_png_exports/panels_svg__decorative_divider_4k.png",
+      "resolution": [
+        4096,
+        246
+      ]
+    },
+    {
+      "svg": "04_panels_svg/doc_compatibility_tray.svg",
+      "png": "07_4k_png_exports/panels_svg__doc_compatibility_tray_4k.png",
+      "resolution": [
+        4096,
+        618
+      ]
+    },
+    {
+      "svg": "04_panels_svg/essay_input_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__essay_input_frame_4k.png",
+      "resolution": [
+        4096,
+        1001
+      ]
+    },
+    {
+      "svg": "04_panels_svg/icon_circle_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__icon_circle_frame_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "04_panels_svg/main_essay_parchment_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__main_essay_parchment_frame_4k.png",
+      "resolution": [
+        4096,
+        944
+      ]
+    },
+    {
+      "svg": "04_panels_svg/ornate_input_outline.svg",
+      "png": "07_4k_png_exports/panels_svg__ornate_input_outline_4k.png",
+      "resolution": [
+        4096,
+        348
+      ]
+    },
+    {
+      "svg": "04_panels_svg/oval_status_chip.svg",
+      "png": "07_4k_png_exports/panels_svg__oval_status_chip_4k.png",
+      "resolution": [
+        4096,
+        1133
+      ]
+    },
+    {
+      "svg": "04_panels_svg/primary_button_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__primary_button_frame_4k.png",
+      "resolution": [
+        4096,
+        710
+      ]
+    },
+    {
+      "svg": "04_panels_svg/revision_panel_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__revision_panel_frame_4k.png",
+      "resolution": [
+        4096,
+        2348
+      ]
+    },
+    {
+      "svg": "04_panels_svg/revision_row_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__revision_row_frame_4k.png",
+      "resolution": [
+        4096,
+        635
+      ]
+    },
+    {
+      "svg": "04_panels_svg/settings_dual_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__settings_dual_frame_4k.png",
+      "resolution": [
+        4096,
+        652
+      ]
+    },
+    {
+      "svg": "04_panels_svg/sidebar_active_pill.svg",
+      "png": "07_4k_png_exports/panels_svg__sidebar_active_pill_4k.png",
+      "resolution": [
+        4096,
+        1489
+      ]
+    },
+    {
+      "svg": "04_panels_svg/small_outline_button.svg",
+      "png": "07_4k_png_exports/panels_svg__small_outline_button_4k.png",
+      "resolution": [
+        4096,
+        1268
+      ]
+    },
+    {
+      "svg": "04_panels_svg/tab_sheet_4.svg",
+      "png": "07_4k_png_exports/panels_svg__tab_sheet_4_4k.png",
+      "resolution": [
+        4096,
+        390
+      ]
+    },
+    {
+      "svg": "04_panels_svg/top_title_leaf_accent.svg",
+      "png": "07_4k_png_exports/panels_svg__top_title_leaf_accent_4k.png",
+      "resolution": [
+        3351,
+        4096
+      ]
+    },
+    {
+      "svg": "04_panels_svg/workflow_buttons_tray.svg",
+      "png": "07_4k_png_exports/panels_svg__workflow_buttons_tray_4k.png",
+      "resolution": [
+        4096,
+        333
+      ]
+    },
+    {
+      "svg": "04_panels_svg/workflow_panel_frame.svg",
+      "png": "07_4k_png_exports/panels_svg__workflow_panel_frame_4k.png",
+      "resolution": [
+        4096,
+        601
+      ]
+    },
+    {
+      "svg": "04_panels_svg/workflow_step_badge.svg",
+      "png": "07_4k_png_exports/panels_svg__workflow_step_badge_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/butterfly_lineart.svg",
+      "png": "07_4k_png_exports/decoration_svg__butterfly_lineart_4k.png",
+      "resolution": [
+        4096,
+        3173
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/corner_flower_vine.svg",
+      "png": "07_4k_png_exports/decoration_svg__corner_flower_vine_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/corner_scroll_leaf.svg",
+      "png": "07_4k_png_exports/decoration_svg__corner_scroll_leaf_4k.png",
+      "resolution": [
+        4096,
+        3449
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/decorative_ribbon_swirl.svg",
+      "png": "07_4k_png_exports/decoration_svg__decorative_ribbon_swirl_4k.png",
+      "resolution": [
+        4096,
+        771
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/floating_feather.svg",
+      "png": "07_4k_png_exports/decoration_svg__floating_feather_4k.png",
+      "resolution": [
+        4096,
+        2378
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/flower_border_top.svg",
+      "png": "07_4k_png_exports/decoration_svg__flower_border_top_4k.png",
+      "resolution": [
+        4096,
+        512
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/hanging_flower_charm.svg",
+      "png": "07_4k_png_exports/decoration_svg__hanging_flower_charm_4k.png",
+      "resolution": [
+        2816,
+        4096
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/hanging_tassel.svg",
+      "png": "07_4k_png_exports/decoration_svg__hanging_tassel_4k.png",
+      "resolution": [
+        1974,
+        4096
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/ink_dots_spray.svg",
+      "png": "07_4k_png_exports/decoration_svg__ink_dots_spray_4k.png",
+      "resolution": [
+        4096,
+        2130
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/mountain_ink_outline.svg",
+      "png": "07_4k_png_exports/decoration_svg__mountain_ink_outline_4k.png",
+      "resolution": [
+        4096,
+        1609
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/pagoda_lineart.svg",
+      "png": "07_4k_png_exports/decoration_svg__pagoda_lineart_4k.png",
+      "resolution": [
+        4096,
+        3855
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/sakura_branch_horizontal.svg",
+      "png": "07_4k_png_exports/decoration_svg__sakura_branch_horizontal_4k.png",
+      "resolution": [
+        4096,
+        2140
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/sakura_flower.svg",
+      "png": "07_4k_png_exports/decoration_svg__sakura_flower_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/sparkle_decoration.svg",
+      "png": "07_4k_png_exports/decoration_svg__sparkle_decoration_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "05_decoration_svg/wind_swirls.svg",
+      "png": "07_4k_png_exports/decoration_svg__wind_swirls_4k.png",
+      "resolution": [
+        4096,
+        991
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_analysis.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_analysis_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_arrow_down.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_arrow_down_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_arrow_right.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_arrow_right_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_bell.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_bell_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_chat.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_chat_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_check.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_check_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_checkbox_off.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_checkbox_off_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_checkbox_on.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_checkbox_on_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_chevron_down.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_chevron_down_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_clipboard.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_clipboard_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_close.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_close_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_cloud.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_cloud_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_copy.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_copy_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_document.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_document_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_expand.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_expand_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_export.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_export_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_external_link.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_external_link_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_feather.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_feather_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_feather_nib.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_feather_nib_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_file_text.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_file_text_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_flower.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_flower_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_folder.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_folder_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_github.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_github_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_globe.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_globe_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_google_docs.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_google_docs_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_history.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_history_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_hourglass.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_hourglass_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_import.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_import_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_json.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_json_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_key.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_key_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_keyboard.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_keyboard_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_maximize.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_maximize_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_minimize.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_minimize_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_model.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_model_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_more.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_more_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_network.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_network_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_play.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_play_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_progress.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_progress_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_quill.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_quill_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_radio_off.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_radio_off_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_radio_on.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_radio_on_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_refresh.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_refresh_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_save.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_save_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_search.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_search_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_settings.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_settings_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_spark.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_spark_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_status.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_status_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_stop.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_stop_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_wand.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_wand_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "svg": "06_icons_svg/icon_word.svg",
+      "png": "07_4k_png_exports/icons_svg__icon_word_4k.png",
+      "resolution": [
+        4096,
+        4096
+      ]
+    }
+  ]
+}
