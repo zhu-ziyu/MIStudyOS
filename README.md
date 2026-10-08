@@ -1,6 +1,6 @@
 # 宓语 StudyOS
 
-这是 Windows 桌面软件。第一版为首页 UI、分层美术、约 6.8 秒出场动画和模块入口壳层。尚未接入课程、成绩、Outlook 或新业务功能。
+这是 Windows 桌面软件。当前 v0.2.1 为首页 UI、分层美术、9.3 秒分幕出场动画和模块入口壳层。尚未接入课程、成绩、Outlook 或新业务功能。
 
 ## 启动桌面软件
 
@@ -16,7 +16,7 @@
 
 Python 依赖为 pywebview 与 PyInstaller；Windows 需有 Microsoft WebView2 Runtime。本机已有该运行时。项目原 `.venv` 指向已失效的 Python 3.13 安装位置，因此新建隔离的 `.desktop-env`，不修改旧环境。
 
-`app.py` 在应用进程内部提供素材服务，使用动态本机端口，关闭软件时一并退出。设置写入应用目录下 `.studyos-data`，独立于浏览器配置。
+`app.py` 在应用进程内部提供素材服务，优先使用固定本机端口以复用美术缓存，端口占用时自动分配独立端口；关闭软件时一并退出。设置写入应用目录下 `.studyos-data`，独立于浏览器配置。
 
 ## UI 开发预览
 
@@ -49,9 +49,12 @@ npm run dev
 
 - `src/main.js`：首页交互、出场状态、搜索、设置、入口适配器。
 - `src/art.js`：模块 DOM、可点击标签、箭头和预览图标。
-- `src/scene.js`：连续原画墨线、真实笔画轨迹、柔和翼片展开和统一动画时钟。
-- `src/character.js`：对齐原画的闭眼素材、局部软遮罩和眨眼时序。
-- `src/mesh.js`：连续采样的轻微呼吸与鼠标偏转，GPU 不可用时保留静态原画和眨眼。
+- `src/scene.js`：统一时钟、双翼铰点运动、实际绘制帧统计与暂停管理。
+- `src/intro-timeline.js`：绘制、四对双翼、中央卡片与欢迎区共用的时间轴。
+- `src/character.js`：延后加载的 176×104 眼部图集、自然眨眼、偏头注视与点击回应。
+- `src/eye-worker.js`：在工作线程解码、配准闭眼大图，避免阻塞主界面。
+- `src/mesh.js`：连续原画 GPU 绘制、曲线墨迹展开、呼吸与发丝滞后；GPU 不可用时保留完整原画淡入与模块操作。
+- `scripts/compile-ink-timing.mjs`：把 1,284 条原画线迹预编译成数值时序场，修改线迹数据后重新运行此脚本。
 - `src/home.css`：16:9 画卷、小屏排版、动画和减少动态效果。
 - `assets/lineart/`：原素材保持原位；新增一张闭眼参考素材，原图未覆盖。
 - `resource-packs/MiStudyOS_Home_4K_AssetPack/`：四个用户素材 ZIP 合并的独立资源包，保留 4K PNG、SVG、参考图、manifest 和分镜文档。

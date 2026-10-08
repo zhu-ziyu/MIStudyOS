@@ -13,7 +13,7 @@
   <body>
     <a class="skip-link" href="#course">跳到功能导航</a>
     <main id="app" aria-label="宓语 StudyOS 首页">
-      <div id="stage-wrap"><div id="home-stage" class="home-stage" aria-label="StudyOS 纸墨书房"></div></div>
+      <div id="stage-wrap"><div id="home-stage" class="home-stage" aria-label="StudyOS 纸墨书房"><header class="brand"><h1><span class="brand-cn">宓语</span><span class="brand-en">StudyOS</span></h1><p class="brand-subtitle">Mi Study Operating System</p><p class="brand-motto">思考有形，文字有光。</p></header></div></div>
       <div class="scene-tools" aria-label="动画控制">
         <button id="replay-intro" title="重放出场动画">↺ <span>重绘此刻</span></button>
         <span class="tool-divider"></span>
@@ -25,6 +25,10 @@
     <dialog id="module-dialog" class="module-dialog" aria-labelledby="dialog-title"></dialog>
     <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title"></dialog>
     <div id="toast" class="toast" role="status"></div>
+    <script>
+      const initialStage=document.getElementById('home-stage');
+      if(innerWidth>=900)initialStage.style.transform='translate(-50%, -50%) scale('+Math.min(innerWidth/1672,innerHeight/941)+')';
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

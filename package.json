@@ -1,13 +1,13 @@
 {
   "name": "miyu-studyos",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "description": "宓语 StudyOS — 纸墨首页与 Writing Studio 壳层",
   "type": "module",
   "scripts": {
     "dev": "node scripts/server.mjs",
     "start": "node scripts/server.mjs",
-    "check": "node --check src/main.js && node --check src/art.js && node --check src/character.js && node --check src/scene.js && node --check src/mesh.js && node --check scripts/server.mjs",
+    "check": "node --check src/main.js && node --check src/art.js && node --check src/character.js && node --check src/eye-worker.js && node --check src/intro-timeline.js && node --check src/scene.js && node --check src/mesh.js && node --check scripts/server.mjs",
     "test:ui": "node scripts/verify-ui.mjs"
   }
 }

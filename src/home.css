@@ -11,7 +11,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .skip-link:focus { top: 12px; }
 #app, #stage-wrap { width: 100vw; height: 100dvh; }
 #stage-wrap { position: relative; overflow: hidden; }
-.home-stage { position: absolute; left: 50%; top: 50%; width: 1672px; height: 941px; transform-origin: center; overflow: hidden; background: var(--paper) url('/resource-packs/MiStudyOS_Home_4K_AssetPack/07_background_decor/paper_texture_3840x2160.png') center / 100% 100%; isolation: isolate; }
+.home-stage { position: absolute; left: 50%; top: 50%; width: 1672px; height: 941px; transform-origin: center; overflow: hidden; background: #f8f8f6; isolation: isolate; }
 .art-layer { position: absolute; pointer-events: none; overflow: visible; }
 .feather-edge { mask-image: linear-gradient(to right, transparent, black 8px, black calc(100% - 8px), transparent), linear-gradient(to bottom, transparent, black 8px, black calc(100% - 8px), transparent); mask-composite: intersect; }
 .top-decor { z-index: 4; }
@@ -97,8 +97,7 @@ kbd { font: 10px Arial, sans-serif; color: #938e82; margin-left: 6px; }
 .mesh-active .scene-canvas, .mesh-active .mi-character { visibility:hidden; }
 @media (min-width:900px) { .module-group .panel-icon { display:none; } }
 .mi-character { transform:none !important; }
-.mi-eyes { position:absolute; inset:0; width:1672px; height:941px; pointer-events:none; }
-.home-stage:not(.scene-ready) .brand,
+.mi-eyes { position:absolute; pointer-events:none; }
 .home-stage:not(.scene-ready) .topbar,
 .home-stage:not(.scene-ready) .greeting,
 .home-stage:not(.scene-ready) .mi-dialog,

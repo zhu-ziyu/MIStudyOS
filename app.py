@@ -38,10 +38,27 @@ class AssetHandler(SimpleHTTPRequestHandler):
         if route not in ("/", "/index.html") and not route.startswith(allowed):
             self.send_error(404)
             return
+        if route in ("/", "/index.html"):
+            # Deliver local settings with the shell, without serial config or
+            # native-bridge round trips on the first visible frame.
+            api = DesktopAPI()
+            try:
+                config = api._config()
+            except (OSError, ValueError):
+                config = {"writingStudio": {"url": None, "mode": "embedded"}}
+            bootstrap = json.dumps({"config": config, "preferences": api.get_preferences()}, ensure_ascii=False).replace("<", "\\u003c")
+            html = (ROOT / "index.html").read_text(encoding="utf-8").replace('<script type="module"', '<script>window.__STUDYOS_BOOT__=' + bootstrap + ';</script><script type="module"', 1)
+            body = html.encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
         super().do_GET()
 
     def end_headers(self):
-        self.send_header("Cache-Control", "no-store" if self.path.startswith(("/src/", "/config/")) else "private, max-age=3600")
+        self.send_header("Cache-Control", "no-store" if self.path.startswith(("/src/", "/config/")) or urlsplit(self.path).path in ("/", "/index.html") else "private, max-age=86400")
         self.send_header("X-Content-Type-Options", "nosniff")
         super().end_headers()
 
@@ -130,7 +147,9 @@ def main():
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--smoke-test", action="store_true", help="Open native engine, verify the UI and close automatically.")
     parser.add_argument("--animation-test", action="store_true", help="Capture intermediate intro and eye frames in the native engine.")
+    parser.add_argument("--performance-test", action="store_true", help="Measure startup and actual rendered frame intervals.")
     args = parser.parse_args()
+    launch_clock = time.perf_counter()
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(filename=DATA_DIR / "desktop.log", encoding="utf-8", level=logging.INFO)
     try:
@@ -142,7 +161,12 @@ def main():
             ctypes.windll.user32.MessageBoxW(None, message, "宓语 StudyOS", 0x10)
         raise SystemExit(message)
 
-    server = ThreadingHTTPServer(("127.0.0.1", 0), AssetHandler)
+    # A stable local origin lets WebView2 reuse decoded/cacheable artwork on
+    # later launches. A second instance gets an independent ephemeral port.
+    try:
+        server = ThreadingHTTPServer(("127.0.0.1", 41737), AssetHandler)
+    except OSError:
+        server = ThreadingHTTPServer(("127.0.0.1", 0), AssetHandler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     origin = f"http://127.0.0.1:{server.server_address[1]}"
@@ -151,7 +175,7 @@ def main():
     smoke_result = {}
 
     def verify_native():
-        if not (args.smoke_test or args.animation_test):
+        if not (args.smoke_test or args.animation_test or args.performance_test):
             return
         try:
             deadline = time.monotonic() + 35
@@ -161,6 +185,30 @@ def main():
                     break
                 time.sleep(.15)
             assert result, "UI did not initialize"
+            if args.performance_test:
+                startup = {"nativeReadyMs": round((time.perf_counter()-launch_clock)*1000,1), "frontendReadyMs": window.evaluate_js("Math.round(performance.now())"), "firstVisiblePaintMs": window.evaluate_js("Math.round(performance.getEntriesByType('paint').find(p=>p.name==='first-contentful-paint')?.startTime || 0)"), "launchIntroMs": window.evaluate_js("window.studyos.getState().scene.duration")}
+                window.evaluate_js("""(()=>{
+                    window.__renderSamples=[];
+                    const original=CanvasRenderingContext2D.prototype.drawImage;
+                    CanvasRenderingContext2D.prototype.drawImage=function(...args){
+                        const out=original.apply(this,args);
+                        if(this.canvas.classList.contains('scene-canvas')&&this.globalCompositeOperation==='destination-in')window.__renderSamples.push(performance.now());
+                        return out;
+                    };
+                    window.studyos.replayIntro();
+                })()""")
+                duration = window.evaluate_js("window.studyos.getState().scene.duration || 6800")
+                time.sleep(duration/1000+.25)
+                measured = window.evaluate_js("window.studyos.getState().scene.performance || {timestamps:window.__renderSamples}")
+                stamps = measured.get("timestamps", [])
+                intervals = sorted([b-a for a,b in zip(stamps,stamps[1:]) if b-a>0][3:])
+                assert len(intervals)>20, "Actual render frames were not recorded"
+                performance = {"renderedFrames":len(stamps),"medianRenderIntervalMs":round(intervals[len(intervals)//2],2),"p95RenderIntervalMs":round(intervals[int(len(intervals)*.95)],2),"stallsOver50ms":sum(interval>50 for interval in intervals)}
+                report = {"startup":startup,"playback":performance,"state":window.evaluate_js("window.studyos.getState()")}
+                (APP_DIR / "artifacts").mkdir(exist_ok=True)
+                (APP_DIR / "artifacts" / "native-performance.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
+                smoke_result.update({"passed":True,"performance":performance,"startup":startup})
+                return
             window.evaluate_js("window.studyos.finishIntro()")
             state = window.evaluate_js("({title:document.title, modules:document.querySelectorAll('.module-button').length, native:!!window.pywebview.api, duplicateDialogText:document.querySelectorAll('.dialog-cn').length})")
             assert state["modules"] == 10
@@ -170,13 +218,34 @@ def main():
             assert frame["left"] >= -1 and frame["right"] <= frame["width"] + 1, "Stage cropped horizontally"
             assert frame["top"] >= -1 and frame["bottom"] <= frame["height"] + 1, "Stage cropped vertically"
             if args.animation_test:
+                deadline = time.monotonic() + 10
+                while not window.evaluate_js("window.studyos.getState().character.eyesReady") and time.monotonic() < deadline:
+                    time.sleep(.1)
+                assert window.evaluate_js("window.studyos.getState().character.eyesReady"), "Eye art did not load"
                 captures = []
-                for milliseconds in (0, 900, 1500, 2300, 3000, 3400, 3900, 4500, 4800, 5300, 5700, 6100, 6800):
+                for milliseconds in (0, 1200, 2400, 2850, 3400, 4050, 4850, 5650, 6350, 6980, 7640, 8280, 8880, 9300):
                     window.evaluate_js(f"window.studyos.seekIntro({milliseconds})")
                     time.sleep(.06)
                     name = f"intro-{milliseconds:04d}.png"
                     capture_native_preview(window, APP_DIR / "artifacts" / "animation" / name)
                     captures.append(name)
+                # Check the visible hierarchy, not just the total duration.
+                # New controls must stay absent until the preceding act settles.
+                for milliseconds, visible, absent in (
+                    (2850, (), ("course", "writing", "daily", "grades")),
+                    (3740, ("course", "writing"), ("calendar", "exam", "daily")),
+                    (6300, ("course", "calendar", "assignment", "flashcards", "writing", "exam", "inbox", "originality"), ("daily", "grades")),
+                    (7070, ("daily",), ("grades",)),
+                    (7720, ("daily", "grades"), ()),
+                ):
+                    window.evaluate_js(f"window.studyos.seekIntro({milliseconds})")
+                    opacity = window.evaluate_js("Object.fromEntries([...document.querySelectorAll('[data-module]')].map(n=>[n.dataset.module,Number(getComputedStyle(n).opacity)]))")
+                    assert all(opacity[item] > .99 for item in visible), f"Act did not settle at {milliseconds}"
+                    assert all(opacity[item] < .001 for item in absent), f"Acts overlapped at {milliseconds}"
+                window.evaluate_js("window.studyos.seekIntro(7720)")
+                assert window.evaluate_js("Number(getComputedStyle(document.querySelector('.topbar')).opacity)") == 0, "Search appeared during the card act"
+                window.evaluate_js("window.studyos.seekIntro(8470)")
+                assert window.evaluate_js("Number(getComputedStyle(document.querySelector('.mi-dialog')).opacity)") == 0, "Welcome appeared before the room settled"
                 window.evaluate_js("window.studyos.finishIntro()")
                 for amount in (0, .5, 1):
                     window.evaluate_js(f"window.studyos.seekBlink({amount})")
@@ -185,23 +254,29 @@ def main():
                 window.evaluate_js("window.studyos.replayIntro(); window.studyos.finishIntro(); window.studyos.replayIntro(); window.studyos.finishIntro()")
                 clean = window.evaluate_js("window.studyos.getState()")
                 assert not clean["introRunning"] and clean["scene"]["complete"] and clean["character"]["blink"] == 0
-                window.evaluate_js("""(()=>{
-                    window.studyos.replayIntro(); window.__studyosFrames=[];
-                    let previous=performance.now(), until=previous+3200;
-                    function sample(now){window.__studyosFrames.push(now-previous);previous=now;if(now<until)requestAnimationFrame(sample);}
-                    requestAnimationFrame(sample);
-                })()""")
+                window.evaluate_js("window.studyos.replayIntro()")
                 time.sleep(3.4)
-                samples = window.evaluate_js("window.__studyosFrames")
-                samples = sorted(samples[3:])
+                timestamps = window.evaluate_js("window.studyos.getState().scene.performance.timestamps")
+                samples = sorted([b-a for a,b in zip(timestamps,timestamps[1:])][3:])
                 assert len(samples) > 30, "Intro did not render continuously"
                 performance = {"frames": len(samples), "medianFrameMs": round(samples[len(samples)//2], 2), "p95FrameMs": round(samples[int(len(samples)*.95)], 2)}
                 assert performance["p95FrameMs"] < 50, "Intro rendering has repeated frame stalls"
                 window.evaluate_js("window.studyos.finishIntro()")
+                window.evaluate_js("""(()=>{
+                    const stage=document.getElementById('home-stage'),r=stage.getBoundingClientRect();
+                    stage.dispatchEvent(new PointerEvent('pointermove',{clientX:r.left+r.width*.92,clientY:r.top+r.height*.3}));
+                })()""")
+                time.sleep(.45)
+                assert window.evaluate_js("window.studyos.getState().scene.gaze[0]") > .55, "Character did not respond to pointer"
+                window.evaluate_js("window.studyos.openModule('course')")
+                paused = window.evaluate_js("window.studyos.getState().scene.performance.idleTimestamps.at(-1)")
+                time.sleep(.2)
+                assert window.evaluate_js("window.studyos.getState().scene.performance.idleTimestamps.at(-1)") == paused, "Idle drawing continued behind a dialog"
+                window.evaluate_js("document.getElementById('module-dialog').close()")
                 window.evaluate_js("window.studyos.seekIntro(325, true)")
                 assert window.evaluate_js("getComputedStyle(document.querySelector('.module-group')).opacity") == '0.5'
                 window.evaluate_js("window.studyos.finishIntro()")
-                smoke_result.update({"animationFrames": captures, "genuineInkStrokes": clean["scene"]["tracedStrokes"], "blinkRegistrationInliers": clean["character"]["registrationInliers"], "continuousMesh": clean["scene"]["continuousMesh"], "replaySkipClean": True, "reducedMotionFade": True, "performance": performance})
+                smoke_result.update({"animationFrames": captures, "orderedActs": True, "genuineInkStrokes": clean["scene"]["tracedStrokes"], "blinkRegistrationInliers": clean["character"]["registrationInliers"], "continuousMesh": clean["scene"]["continuousMesh"], "replaySkipClean": True, "reducedMotionFade": True, "pointerResponse": True, "pausedBehindDialog": True, "performance": performance})
             window.evaluate_js("document.getElementById('home-stage').classList.add('motion-off')")
             window.evaluate_js("window.studyos.seekBlink(0)")
             time.sleep(.4)
@@ -221,12 +296,12 @@ def main():
             window.destroy()
 
     try:
-        qa = args.smoke_test or args.animation_test
+        qa = args.smoke_test or args.animation_test or args.performance_test
         webview.start(verify_native if qa else None, gui="edgechromium", debug=args.debug, private_mode=False, storage_path=str(DATA_DIR / ("qa-webview" if qa else "webview")))
     finally:
         server.shutdown()
         server.server_close()
-    if (args.smoke_test or args.animation_test) and not smoke_result.get("passed"):
+    if (args.smoke_test or args.animation_test or args.performance_test) and not smoke_result.get("passed"):
         raise SystemExit(1)
 
 

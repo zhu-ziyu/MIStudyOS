@@ -2,8 +2,10 @@ import { modules } from './modules.js';
 import { localArt, buildPanel } from './art.js';
 import { createCharacter } from './character.js';
 import { createScene } from './scene.js';
+import { INTRO, introCaptions } from './intro-timeline.js';
 
 const stage = document.querySelector('#home-stage');
+document.title = '宓语 StudyOS';
 const moduleDialog = document.querySelector('#module-dialog');
 const settingsDialog = document.querySelector('#settings-dialog');
 const reducePreference = matchMedia('(prefers-reduced-motion: reduce)');
@@ -12,7 +14,12 @@ let settings = { ...defaults };
 try { settings = { ...defaults, ...JSON.parse(localStorage.getItem('miyu-studyos-preferences') || '{}') }; } catch { /* Storage can be unavailable in private sessions. */ }
 settings.name = String(settings.name || 'Sam').slice(0, 16);
 let config = { writingStudio: { url: null, mode: 'embedded' } };
-try { config = await (await fetch('/config/studyos.json')).json(); } catch { /* The UI also works with the default adapter. */ }
+if (window.__STUDYOS_BOOT__) {
+  settings = { ...settings, ...window.__STUDYOS_BOOT__.preferences };
+  config = window.__STUDYOS_BOOT__.config;
+} else {
+  fetch('/config/studyos.json').then(r=>r.json()).then(value=>{config=value;}).catch(()=>{});
+}
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const motionEnabled = () => settings.motion && !reducePreference.matches;
 let desktopAPI = null;
@@ -29,10 +36,10 @@ let activeModule = null;
 let toastTimer;
 let opener = null;
 
-const character = await createCharacter(stage);
+const character = createCharacter(stage);
 modules.forEach(module => stage.append(buildPanel(module)));
 
-const brand = document.createElement('header');
+const brand = stage.querySelector('.brand') || document.createElement('header');
 brand.className = 'brand';
 brand.innerHTML = '<h1><span class="brand-cn">宓语</span><span class="brand-en">StudyOS</span></h1><p class="brand-subtitle">Mi Study Operating System</p><p class="brand-motto">思考有形，文字有光。</p>';
 stage.append(brand);
@@ -124,12 +131,11 @@ function playIntro() {
   introRunning = true;
   stage.dataset.state = 'intro';
   stage.classList.add(motionEnabled() ? 'intro-running' : 'intro-reduced');
-  scene.play(!motionEnabled());
+  const duration = scene.play(!motionEnabled());
   document.querySelector('#intro-control').hidden = false;
-  const phases = [[0,'纸面苏醒'], [700,'一笔一画，宓与你相遇'], [1400,'书房渐明'], [3100,'花枝舒展'], [4550,'今日，始于此刻'], [5550,'宓 · 欢迎回来']];
-  if (motionEnabled()) phases.forEach(([delay, text]) => phaseTimers.push(setTimeout(() => { document.querySelector('#intro-phase').textContent = text; }, delay)));
+  if (motionEnabled()) introCaptions.forEach(([delay, text]) => phaseTimers.push(setTimeout(() => { document.querySelector('#intro-phase').textContent = text; }, delay / INTRO.duration * duration)));
   else document.querySelector('#intro-phase').textContent = '欢迎回来';
-  introTimer = setTimeout(finishIntro, motionEnabled() ? 6800 : 850);
+  introTimer = setTimeout(finishIntro, duration);
 }
 
 applyMotion();
@@ -145,7 +151,7 @@ const defaultPhrase = ['今天先从最重要的一项开始。', 'Let’s begin
 const phrases = [defaultPhrase, ['慢慢来，每一步都算数。', 'One thoughtful step at a time.'], ['让想法落笔，让热爱生长。', 'Give your thoughts a place to bloom.'], ['书页已展开，等你写下今天。', 'A fresh page is waiting for you.']];
 let phraseIndex = 0;
 function setPhrase([cn, en]) { miDialog.querySelector('.dialog-cn').textContent = cn; miDialog.querySelector('.dialog-en').textContent = en; }
-miDialog.addEventListener('click', () => { if (introRunning) finishIntro(true); phraseIndex = (phraseIndex + 1) % phrases.length; setPhrase(phrases[phraseIndex]); });
+miDialog.addEventListener('click', () => { if (introRunning) finishIntro(true); character.react(); phraseIndex = (phraseIndex + 1) % phrases.length; setPhrase(phrases[phraseIndex]); });
 
 function closeSearch() { searchResults.hidden = true; search.setAttribute('aria-expanded','false'); }
 function showSearch() {
@@ -168,7 +174,11 @@ searchResults.addEventListener('keydown', event => {
   if (event.key === 'Escape') { closeSearch(); search.focus(); }
 });
 document.addEventListener('pointerdown', event => { if (!topbar.contains(event.target)) closeSearch(); });
-stage.addEventListener('pointerdown', () => { if (introRunning) finishIntro(true); });
+stage.addEventListener('pointerdown', event => {
+  if (introRunning) { finishIntro(true); return; }
+  const r=stage.getBoundingClientRect(),x=(event.clientX-r.left)/r.width*1672,y=(event.clientY-r.top)/r.height*941;
+  if(!event.target.closest('button,input') && x>710 && x<1000 && y>130 && y<570)character.react();
+});
 
 function configuredWritingUrl() {
   const value = config.writingStudio?.url;
@@ -277,6 +287,7 @@ window.studyos = {
     clearIntroTimers(); character.pause(); introRunning = true;
     stage.classList.remove('idle'); stage.classList.add('intro-running');
     stage.dataset.state = 'intro'; document.querySelector('#intro-control').hidden = false;
+    document.querySelector('#intro-phase').textContent = reduced ? '欢迎回来' : [...introCaptions].reverse().find(([at])=>at<=time)?.[1] || introCaptions[0][1];
     scene.seek(time, reduced);
   },
   seekBlink(amount) { character.pause(); character.seekBlink(amount); scene.freezeAmbient(); },
