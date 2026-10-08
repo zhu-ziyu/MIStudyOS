@@ -1,3 +1,4 @@
+import { speechPlan, speechPose } from './dialogue-lines.js';
 const CLOSED='/assets/lineart/01_character/mi_closed_eyes_reference.png';
 // The eye atlas is only 176 × 104. Decoding the source never blocks the home.
 const bounds=[756,190,176,104];
@@ -9,6 +10,15 @@ export function createCharacter(stage){
   const ctx=surface.getContext('2d',{willReadFrequently:true}),patch=Object.assign(document.createElement('canvas'),{width:bounds[2],height:bounds[3]});
   let active=false,enabled=true,loaded=false,timer=0,raf=0,amount=0,blinkCount=0;
   let onChange=()=>{},onLook=()=>{},onActivity=()=>{},onReact=()=>{};
+  let plan=null,talkStarted=0,manualMouth=null;
+  function sampleSpeech(now=performance.now()){
+    if(manualMouth!==null)return {mouth:manualMouth,speaking:false};
+    if(!active||!enabled||document.hidden)return {mouth:0,speaking:false};
+    const pose=speechPose(plan,now-talkStarted);
+    if(!pose.speaking)plan=null;
+    return pose;
+  }
+  function stopTalk(){plan=null;manualMouth=null;}
   function render(value){
     amount=Math.max(0,Math.min(1,value));ctx.clearRect(0,0,...bounds.slice(2));
     if(loaded&&amount){ctx.globalAlpha=amount;ctx.drawImage(patch,0,0);ctx.globalAlpha=1;}
@@ -64,13 +74,27 @@ export function createCharacter(stage){
   return {
     element,canvas:surface,bounds,ready,
     bind({change,look,activity,react}){onChange=change;onLook=look;onActivity=activity;onReact=react||onReact;},
-    start(){const wasActive=active;active=true;if(!raf)schedule();onActivity(enabled&&!document.hidden);if(!wasActive)onReact('welcome');},
-    pause(){active=false;cancel();onActivity(false);},
-    setMotion(value){enabled=!!value;cancel();if(active)schedule();onActivity(active&&enabled&&!document.hidden);},
+    start(){const wasActive=active;active=true;manualMouth=null;if(!raf)schedule();onActivity(enabled&&!document.hidden);if(!wasActive)onReact('welcome');},
+    pause(){active=false;stopTalk();cancel();onActivity(false);},
+    setMotion(value){
+      const next=!!value;
+      // Loading the native settings again must not interrupt a sentence or
+      // restart a blink when the motion preference has not actually changed.
+      if(enabled===next)return;
+      enabled=next;stopTalk();cancel();if(active)schedule();onActivity(active&&enabled&&!document.hidden);
+    },
     look(x,y){if(active&&enabled)onLook(x,y);},
     react(){if(active&&enabled){onReact('nod');schedule(220);}},
+    talk(text){
+      stopTalk();
+      if(!active||!enabled||document.hidden)return 0;
+      plan=speechPlan(text);talkStarted=performance.now();onReact('speak');return plan.duration;
+    },
+    stopTalk,sampleSpeech,
+    seekTalk(value){stopTalk();manualMouth=Math.max(0,Math.min(1,value));},
     reset(){render(0);onLook(0,0);},
     seekBlink(value){clearTimeout(timer);cancelAnimationFrame(raf);timer=raf=0;render(value);},
-    getState:()=>({active,enabled,blink:amount,scheduled:!!timer,eyesReady:loaded,eyeAtlas:bounds.slice(2),registrationInliers:23})
+    getState:()=>({active,enabled,blink:amount,scheduled:!!timer,eyesReady:loaded,eyeAtlas:bounds.slice(2),registrationInliers:23,
+      ...sampleSpeech(),speechDuration:plan?.duration||0})
   };
 }

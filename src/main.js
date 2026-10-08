@@ -2,6 +2,7 @@ import { modules } from './modules.js';
 import { localArt, buildPanel } from './art.js';
 import { createCharacter } from './character.js';
 import { createScene } from './scene.js';
+import { createCompanion } from './companion.js';
 import { INTRO, introCaptions } from './intro-timeline.js';
 
 const stage = document.querySelector('#home-stage');
@@ -9,7 +10,7 @@ document.title = '宓语 StudyOS';
 const moduleDialog = document.querySelector('#module-dialog');
 const settingsDialog = document.querySelector('#settings-dialog');
 const reducePreference = matchMedia('(prefers-reduced-motion: reduce)');
-const defaults = { name: 'Sam', motion: true, intro: true };
+const defaults = { name: 'Sam', motion: true, intro: true, companion: true };
 let settings = { ...defaults };
 try { settings = { ...defaults, ...JSON.parse(localStorage.getItem('miyu-studyos-preferences') || '{}') }; } catch { /* Storage can be unavailable in private sessions. */ }
 settings.name = String(settings.name || 'Sam').slice(0, 16);
@@ -35,6 +36,7 @@ let introRunning = false;
 let activeModule = null;
 let toastTimer;
 let opener = null;
+let introFinishedAt = -Infinity;
 
 const character = createCharacter(stage);
 modules.forEach(module => stage.append(buildPanel(module)));
@@ -63,9 +65,13 @@ stage.append(greeting);
 
 const miDialog = document.createElement('button');
 miDialog.className = 'mi-dialog';
-miDialog.setAttribute('aria-label', '与宓相遇，切换欢迎语');
-miDialog.insertAdjacentHTML('beforeend', '<span class="dialog-cn">今天先从最重要的一项开始。</span><span class="dialog-en">Let’s begin with what matters most.</span>');
+miDialog.setAttribute('aria-label', '宓：来了就坐好。先做最重要的一项。点击再说一句');
+miDialog.insertAdjacentHTML('beforeend', '<span class="dialog-cn"></span><span class="dialog-en"></span>');
 stage.append(miDialog);
+const characterHit = document.createElement('button');
+characterHit.className = 'character-hit';characterHit.type = 'button';
+characterHit.setAttribute('aria-label', '点击宓，让学姐说句话');
+stage.append(characterHit);
 
 const footer = document.createElement('footer');
 footer.className = 'footer-motto';
@@ -75,6 +81,9 @@ const scene = await createScene(stage, character);
 
 const search = document.querySelector('#home-search');
 const searchResults = document.querySelector('#search-results');
+const isHome = () => !introRunning && !moduleDialog.open && !settingsDialog.open && !document.hidden;
+const companion = createCompanion({character,bubble:miDialog,isHome,motionEnabled,preferences:()=>settings,
+  autoAllowed:()=>document.hasFocus() && searchResults.hidden && !document.activeElement?.matches('input,textarea,[contenteditable="true"]')});
 const updateGreeting = () => {
   // Dates and greetings follow the user's timezone, including daylight savings.
   const now = new Date();
@@ -105,6 +114,7 @@ function applyMotion() {
   const toggle = document.querySelector('#toggle-motion');
   toggle.setAttribute('aria-pressed', String(!motionEnabled()));
   toggle.textContent = motionEnabled() ? '静止画卷' : '唤醒画卷';
+  companion.sync();
 }
 
 function clearIntroTimers() {
@@ -116,15 +126,18 @@ function finishIntro(skipped = false) {
   clearIntroTimers();
   scene.finish();
   introRunning = false;
+  introFinishedAt = performance.now();
   stage.classList.remove('intro-running', 'intro-reduced');
   stage.classList.add('idle');
   document.querySelector('#intro-control').hidden = true;
   if (!document.hidden && !moduleDialog.open && !settingsDialog.open) character.start();
   stage.dataset.state = 'idle';
+  companion.sync({welcome:true});
 }
 
 function playIntro() {
   clearIntroTimers();
+  companion.pause();
   character.pause(); character.reset();
   stage.classList.remove('idle', 'intro-running', 'intro-reduced', 'settling');
   void stage.offsetWidth;
@@ -147,18 +160,22 @@ function toast(message) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => node.classList.remove('visible'), 3000);
 }
 
-const defaultPhrase = ['今天先从最重要的一项开始。', 'Let’s begin with what matters most.'];
-const phrases = [defaultPhrase, ['慢慢来，每一步都算数。', 'One thoughtful step at a time.'], ['让想法落笔，让热爱生长。', 'Give your thoughts a place to bloom.'], ['书页已展开，等你写下今天。', 'A fresh page is waiting for you.']];
-let phraseIndex = 0;
-function setPhrase([cn, en]) { miDialog.querySelector('.dialog-cn').textContent = cn; miDialog.querySelector('.dialog-en').textContent = en; }
-miDialog.addEventListener('click', () => { if (introRunning) finishIntro(true); character.react(); phraseIndex = (phraseIndex + 1) % phrases.length; setPhrase(phrases[phraseIndex]); });
+function pokeCharacter() {
+  if (introRunning) { finishIntro(true); return false; }
+  // The pointer that skipped an intro cannot also trigger a second action.
+  if (performance.now() - introFinishedAt < 250) return false;
+  return companion.poke();
+}
+miDialog.addEventListener('click', pokeCharacter);
+characterHit.addEventListener('click', pokeCharacter);
 
-function closeSearch() { searchResults.hidden = true; search.setAttribute('aria-expanded','false'); }
+function closeSearch() { searchResults.hidden = true; search.setAttribute('aria-expanded','false'); companion.sync(); }
 function showSearch() {
   const term = search.value.trim().toLowerCase();
   const matches = modules.filter(module => `${module.name} ${module.english} ${module.theme} ${module.keywords}`.toLowerCase().includes(term));
   searchResults.innerHTML = matches.length ? matches.map(module => `<button data-open-module="${module.id}">${module.name}<small>${module.english} · ${module.theme}</small></button>`).join('') : '<p class="search-empty">还没有找到这页课笺。试试课程、日历、写作…</p>';
   searchResults.hidden = false; search.setAttribute('aria-expanded','true');
+  companion.sync();
 }
 search.addEventListener('input', showSearch);
 search.addEventListener('focus', () => { if (introRunning) finishIntro(true); showSearch(); });
@@ -176,9 +193,9 @@ searchResults.addEventListener('keydown', event => {
 document.addEventListener('pointerdown', event => { if (!topbar.contains(event.target)) closeSearch(); });
 stage.addEventListener('pointerdown', event => {
   if (introRunning) { finishIntro(true); return; }
-  const r=stage.getBoundingClientRect(),x=(event.clientX-r.left)/r.width*1672,y=(event.clientY-r.top)/r.height*941;
-  if(!event.target.closest('button,input') && x>710 && x<1000 && y>130 && y<570)character.react();
 });
+document.addEventListener('focusin', () => companion.sync());
+document.addEventListener('focusout', () => queueMicrotask(() => companion.sync()));
 
 function configuredWritingUrl() {
   const value = config.writingStudio?.url;
@@ -207,6 +224,7 @@ function openModule(id) {
   moduleDialog.showModal();
   moduleDialog.querySelector('.close-dialog').focus();
   character.pause();
+  companion.pause();
 }
 
 document.addEventListener('click', async event => {
@@ -219,7 +237,7 @@ document.addEventListener('click', async event => {
     if (result.ok) moduleDialog.close();
   }
 });
-moduleDialog.addEventListener('close', () => { activeModule = null; history.replaceState(null, '', location.pathname); character.start(); opener?.focus(); });
+moduleDialog.addEventListener('close', () => { activeModule = null; history.replaceState(null, '', location.pathname); if(isHome())character.start(); opener?.focus(); companion.sync(); });
 for (const dialog of [moduleDialog, settingsDialog]) {
   dialog.addEventListener('click', event => { if (event.target !== dialog) return; const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); });
 }
@@ -227,25 +245,27 @@ for (const dialog of [moduleDialog, settingsDialog]) {
 function openSettings() {
   if (introRunning) finishIntro(true);
   closeSearch();
-  settingsDialog.innerHTML = `<form class="settings-content" id="settings-form"><button type="button" class="close-dialog" aria-label="关闭设置">×</button><h2 id="settings-title">书房小设</h2><p class="settings-subtitle">A room that feels like you.</p><label class="settings-field">宓该怎样称呼你？<input type="text" name="name" value="${escape(settings.name)}" maxlength="16" required autocomplete="given-name" /></label><label class="settings-field checkbox"><input type="checkbox" name="motion" ${settings.motion ? 'checked' : ''}/>让画卷轻轻呼吸</label><label class="settings-field checkbox"><input type="checkbox" name="intro" ${settings.intro ? 'checked' : ''}/>进入书房时，播放出场动画</label><p class="settings-help">设置保存在${desktopAPI ? '这台电脑' : '当前预览环境'}中。系统开启减少动态效果时，自动使用简短淡入并关闭景深与呼吸。</p><button class="save-settings" type="submit">收好设置</button></form>`;
+  settingsDialog.innerHTML = `<form class="settings-content" id="settings-form"><button type="button" class="close-dialog" aria-label="关闭设置">×</button><h2 id="settings-title">书房小设</h2><p class="settings-subtitle">A room that feels like you.</p><label class="settings-field">宓该怎样称呼你？<input type="text" name="name" value="${escape(settings.name)}" maxlength="16" required autocomplete="given-name" /></label><label class="settings-field checkbox"><input type="checkbox" name="motion" ${settings.motion ? 'checked' : ''}/>让画卷轻轻呼吸</label><label class="settings-field checkbox"><input type="checkbox" name="intro" ${settings.intro ? 'checked' : ''}/>进入书房时，播放出场动画</label><label class="settings-field checkbox"><input type="checkbox" name="companion" ${settings.companion ? 'checked' : ''}/>让学姐偶尔提醒我</label><p class="settings-help">点击宓或对话框，她会回应一句。主动提醒间隔约 1–2 分钟，台词全部保存在本机。设置保存在${desktopAPI ? '这台电脑' : '当前预览环境'}中；系统减少动态效果时关闭口型、呼吸与跟随。</p><button class="save-settings" type="submit">收好设置</button></form>`;
   settingsDialog.querySelector('.close-dialog').addEventListener('click', () => settingsDialog.close());
   settingsDialog.querySelector('form').addEventListener('submit', event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     settings.name = String(data.get('name')).trim() || 'Sam';
     settings.motion = data.has('motion'); settings.intro = data.has('intro');
+    settings.companion = data.has('companion');
     storage(); updateGreeting(); applyMotion(); settingsDialog.close(); toast('设置已收好。欢迎回到你的书房。');
   });
   settingsDialog.showModal();
   character.pause();
+  companion.pause();
 }
-settingsDialog.addEventListener('close', () => { if (!document.hidden && !introRunning) character.start(); });
+settingsDialog.addEventListener('close', () => { if(isHome())character.start(); companion.sync(); });
 document.querySelector('.settings-button').addEventListener('click', openSettings);
 document.querySelector('.user-button').addEventListener('click', openSettings);
 document.querySelector('.notification-button').addEventListener('click', () => {
   if (introRunning) finishIntro(true);
   moduleDialog.innerHTML = '<section class="dialog-shell"><button class="close-dialog" data-close-dialog aria-label="关闭通知">×</button><p class="dialog-eyebrow">YOUR QUIET INBOX</p><h2 id="dialog-title">此刻，一切安静。</h2><p class="dialog-english">No new pages to turn.</p><p class="dialog-description">还没有新通知。</p><p class="module-note">Outlook 与课程公告将在校园信箱模块后续接入。</p><button class="return-home" data-close-dialog>回到书房 ↗</button></section>';
-  opener = document.activeElement; moduleDialog.showModal(); character.pause();
+  opener = document.activeElement; moduleDialog.showModal(); character.pause(); companion.pause();
 });
 
 document.querySelector('#skip-intro').addEventListener('click', () => finishIntro(true));
@@ -272,26 +292,31 @@ stage.addEventListener('pointermove', event => {
 });
 stage.addEventListener('pointerleave', () => character.reset());
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { character.pause(); if (introRunning) finishIntro(true); }
-  else if (!introRunning && !moduleDialog.open && !settingsDialog.open) character.start();
+  if (document.hidden) { companion.pause(); character.pause(); if (introRunning) finishIntro(true); }
+  else if (isHome()) { character.start(); companion.sync(); }
 });
+addEventListener('blur', () => { companion.pause(); character.pause(); });
+addEventListener('focus', () => { if(isHome()){character.start(); companion.sync();} });
 
 // Preserve module links without adding any new business implementation.
 const initialModule = location.hash.slice(1);
 if (modules.some(module => module.id === initialModule)) openModule(initialModule);
 window.studyos = {
   replayIntro: playIntro, finishIntro, openModule,
+  pokeCharacter, previewCompanion:kind=>companion.preview(kind),
   // Deterministic native QA can inspect every intermediate frame and interrupt
   // playback without leaving timers, half lids or partial reveal masks behind.
   seekIntro(time, reduced = false) {
-    clearIntroTimers(); character.pause(); introRunning = true;
+    clearIntroTimers(); companion.pause(); character.pause(); introRunning = true;
     stage.classList.remove('idle'); stage.classList.add('intro-running');
     stage.dataset.state = 'intro'; document.querySelector('#intro-control').hidden = false;
     document.querySelector('#intro-phase').textContent = reduced ? '欢迎回来' : [...introCaptions].reverse().find(([at])=>at<=time)?.[1] || introCaptions[0][1];
     scene.seek(time, reduced);
   },
-  seekBlink(amount) { character.pause(); character.seekBlink(amount); scene.freezeAmbient(); },
-  getState: () => ({ introRunning, activeModule, motion: motionEnabled(), scene:scene.getState(), character:character.getState() })
+  seekBlink(amount) { companion.pause(); character.pause(); character.seekBlink(amount); scene.freezeAmbient(); },
+  seekTalk(amount) { companion.pause(); character.pause(); character.seekTalk(amount); scene.freezeAmbient(); },
+  inspectScenePixels(points) { return scene.inspectPixels(points); },
+  getState: () => ({ introRunning, activeModule, motion: motionEnabled(), scene:scene.getState(), character:character.getState(), companion:companion.getState() })
 };
 
 async function connectDesktop() {

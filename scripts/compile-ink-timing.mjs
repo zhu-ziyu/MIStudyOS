@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 const root=new URL('../',import.meta.url);
 const paths=JSON.parse(await readFile(new URL('src/data/mi-ink-strokes.json',root),'utf8'));
-const width=836,height=471,radius=1.65;
+const width=836,height=471,radius=.9;
 const times=new Uint16Array(width*height).fill(65535);
 const coverage=new Uint8Array(width*height);
 for(const stroke of paths){
@@ -18,14 +18,15 @@ for(const stroke of paths){
       if(edge>radius)continue;
       const t=Math.round(stroke.start+stroke.duration*(distance+u*len)/(stroke.length/2));
       const index=y*width+x;
-      if(t<times[index]){times[index]=t;coverage[index]=Math.round(255*Math.min(1,(radius-edge)/.7));}
+      if(t<times[index])times[index]=t;
+      coverage[index]=Math.max(coverage[index],Math.round(255*Math.min(1,(radius-edge)/.6)));
     }
     distance+=len;
   }
 }
 const bytes=new Uint8Array(width*height*4);
-// 12.5 ms temporal precision is finer than a displayed frame. Normalized times
+// 16 ms temporal precision is finer than a displayed frame. Normalized times
 // can be linearly filtered, avoiding square half-resolution brush boundaries.
-for(let i=0;i<times.length;i++){bytes[i*4]=Math.min(255,Math.round(times[i]/3200*255));bytes[i*4+2]=coverage[i];bytes[i*4+3]=255;}
+for(let i=0;i<times.length;i++){bytes[i*4]=Math.min(255,Math.round(times[i]/4096*255));bytes[i*4+2]=coverage[i];bytes[i*4+3]=255;}
 await writeFile(new URL('src/data/mi-ink-timing.bin',root),bytes);
 console.log(`Compiled ${paths.length} contours, ${width} × ${height} timing field.`);

@@ -13,7 +13,8 @@ const fan=(t,start,side)=>{
 };
 export async function createScene(stage,character){
   const boot=performance.now(),image=new Image();image.src=REFERENCE;
-  const [timing]=await Promise.all([fetch('/src/data/mi-ink-timing.bin').then(r=>r.arrayBuffer()).then(b=>new Uint8Array(b)),image.decode()]);
+  const field=path=>fetch(`/src/data/${path}`).then(r=>{if(!r.ok)throw Error(`Missing scene field: ${path}`);return r.arrayBuffer();}).then(b=>new Uint8Array(b));
+  const [timing,ownership,metadata]=await Promise.all([field('mi-ink-timing.bin'),field('scene-ownership.bin'),fetch('/src/data/scene-fields.json').then(r=>r.json()),image.decode()]);
   const artwork=Object.assign(document.createElement('canvas'),{width:W,height:H});
   const a=artwork.getContext('2d');a.drawImage(image,0,0,W,H);
   const labelWidths={course:113,calendar:131,assignment:180,flashcards:114,writing:140,exam:169,inbox:134,originality:148,daily:220,grades:207};
@@ -21,18 +22,11 @@ export async function createScene(stage,character){
   a.globalCompositeOperation='destination-out';a.filter='blur(2px)';
   a.beginPath();for(const [x,y,w,h] of holes)a.rect(x-2,y-2,w+4,h+4);a.fill();
   a.filter='none';a.globalCompositeOperation='source-over';
-  // Only one half-size field is prepared. Other feathered regions are analytic.
-  const silhouette=Object.assign(document.createElement('canvas'),{width:836,height:471});
-  const sc=silhouette.getContext('2d');sc.scale(.5,.5);sc.filter='blur(16px)';sc.fillStyle='#fff';
-  sc.fill(new Path2D('M672,-8 C738,-10 783,12 857,5 C911,4 968,63 990,127 C1014,179 1009,237 1061,288 C1107,313 1125,344 1151,382 C1189,419 1152,456 1190,516 C1209,549 1171,573 1157,610 L529,610 C498,590 477,577 475,542 C440,516 482,481 481,437 C475,391 522,350 521,306 C528,254 562,222 568,175 C588,126 591,51 672,-8Z'));
-  sc.globalCompositeOperation='destination-out';sc.filter='blur(9px)';sc.fillRect(994,146,316,132);
-  // The character's feathered lower edge must not reveal dashboard icons early.
-  sc.filter='blur(3px)';sc.fillRect(587,614,509,218);
   const fallback=artwork;fallback.className='scene-canvas';fallback.setAttribute('aria-hidden','true');stage.prepend(fallback);
-  const renderer=createSceneRenderer(stage,artwork,character,timing,silhouette);
+  const renderer=createSceneRenderer(stage,artwork,character,timing,ownership);
   const nodes={brand:stage.querySelector('.brand'),topbar:stage.querySelector('.topbar'),greeting:stage.querySelector('.greeting'),dialog:stage.querySelector('.mi-dialog'),footer:stage.querySelector('.footer-motto')};
   const groups=modules.map(m=>({module:m,node:stage.querySelector(`[data-module="${m.id}"]`),start:m.side?wingStart(m.row):INTRO[m.id].start}));
-  let time=0,reduced=false,raf=0,running=false,idle=false,motion=false,frozen=false,started=0,duration=END,previous=0,nextFrame=0;
+  let time=0,reduced=false,raf=0,running=false,idle=false,motion=false,frozen=false,started=0,duration=INTRO.playbackDuration,previous=0,nextFrame=0;
   let target=[0,0],gaze=[0,0],reactionStart=-Infinity,reactionType='',lastPointer=-Infinity;
   let samples=[],idleSamples=[],lastValues=null,domTime=-1;
   const show=(node,value)=>{node.style.opacity=String(value);};
@@ -67,8 +61,9 @@ export async function createScene(stage,character){
     }
     const breath=Math.sin(now/5700*Math.PI*2);
     lastValues={time:t,fade:final?-1:short,life,breath:life?breath:0,
-      tilt:life?(gaze[0]*.009+Math.sin(now/9400)*.002+(reactionType==='nod'?react*.015:react*.007)):0,
-      nod:life&&reactionType!=='glance'?react:0,hair:life?Math.sin(now/6900*Math.PI*2-.7):0,gaze:life?gaze:[0,0],wings};
+      tilt:life?(gaze[0]*.009+Math.sin(now/9400)*.002+(reactionType==='nod'?react*.015:reactionType==='speak'?react*.003:react*.007)):0,
+      nod:life&&reactionType!=='glance'?react*(reactionType==='speak'?.22:1):0,
+      mouth:character.sampleSpeech(now).mouth,hair:life?Math.sin(now/6900*Math.PI*2-.7):0,gaze:life?gaze:[0,0],wings};
     if(renderer?.available)renderer.render(lastValues);
     else {fallback.style.opacity=String(final?1:reduced?short:phase(t,INTRO.character.start,INTRO.character.duration));stage.classList.remove('mesh-active');}
     const renderedAt=performance.now();
@@ -95,11 +90,12 @@ export async function createScene(stage,character){
   draw(0);stage.classList.add('scene-ready');
   const initializedMs=performance.now()-boot;
   return {
-    play(simple=false){stop();idle=false;frozen=false;reduced=simple;duration=simple?650:END;samples=[];started=performance.now();running=true;draw(0,started);wake();return duration;},
+    play(simple=false){stop();idle=false;frozen=false;reduced=simple||!renderer?.available;duration=reduced?650:INTRO.playbackDuration;samples=[];started=performance.now();running=true;draw(0,started);wake();return duration;},
     finish(){stop();idle=true;reduced=false;draw(END);if(motion)wake();},
     seek(t,simple=false){stop();idle=false;frozen=true;reduced=simple;draw(Math.max(0,t));},
     freezeAmbient(){cancelAnimationFrame(raf);frozen=true;draw(END);},
     stop,
-    getState:()=>({time:Math.round(time),running,complete:time>=END,tracedStrokes:1284,idle,continuousMesh:!!renderer?.available,duration,initializedMs:Math.round(initializedMs),performance:{timestamps:samples,idleTimestamps:idleSamples},gaze:gaze.map(n=>+n.toFixed(3))})
+    inspectPixels(points){if(!renderer?.available)return null;renderer.render(lastValues);return renderer.inspectPixels(points);},
+    getState:()=>({time:Math.round(time),running,complete:time>=END,tracedStrokes:metadata.strokes,leadContours:metadata.leadContours,inkCompleteAt:metadata.drawingEnd,semanticOwnership:true,idle,continuousMesh:!!renderer?.available,duration,initializedMs:Math.round(initializedMs),performance:{timestamps:samples,idleTimestamps:idleSamples},gaze:gaze.map(n=>+n.toFixed(3))})
   };
 }

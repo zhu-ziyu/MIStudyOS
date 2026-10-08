@@ -92,7 +92,7 @@ class DesktopAPI:
     def save_preferences(self, values):
         if not isinstance(values, dict):
             return False
-        clean = {"name": str(values.get("name", "Sam"))[:16], "motion": bool(values.get("motion", True)), "intro": bool(values.get("intro", True))}
+        clean = {"name": str(values.get("name", "Sam"))[:16], "motion": bool(values.get("motion", True)), "intro": bool(values.get("intro", True)), "companion": bool(values.get("companion", True))}
         with self._lock:
             DATA_DIR.mkdir(parents=True, exist_ok=True)
             target = DATA_DIR / "preferences.json"
@@ -147,6 +147,7 @@ def main():
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--smoke-test", action="store_true", help="Open native engine, verify the UI and close automatically.")
     parser.add_argument("--animation-test", action="store_true", help="Capture intermediate intro and eye frames in the native engine.")
+    parser.add_argument("--companion-test", action="store_true", help="Verify local dialogue and talking poses in the native engine.")
     parser.add_argument("--performance-test", action="store_true", help="Measure startup and actual rendered frame intervals.")
     args = parser.parse_args()
     launch_clock = time.perf_counter()
@@ -175,12 +176,12 @@ def main():
     smoke_result = {}
 
     def verify_native():
-        if not (args.smoke_test or args.animation_test or args.performance_test):
+        if not (args.smoke_test or args.animation_test or args.performance_test or args.companion_test):
             return
         try:
             deadline = time.monotonic() + 35
             while time.monotonic() < deadline:
-                result = window.evaluate_js("Boolean(window.studyos)")
+                result = window.evaluate_js("Boolean(window.studyos && document.body.dataset.host === 'desktop')")
                 if result:
                     break
                 time.sleep(.15)
@@ -217,13 +218,84 @@ def main():
             frame = window.evaluate_js("(()=>{const r=document.getElementById('home-stage').getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight}})()")
             assert frame["left"] >= -1 and frame["right"] <= frame["width"] + 1, "Stage cropped horizontally"
             assert frame["top"] >= -1 and frame["bottom"] <= frame["height"] + 1, "Stage cropped vertically"
+            if args.companion_test:
+                assert window.evaluate_js("window.studyos.getState().scene.continuousMesh"), "Speech renderer unavailable"
+                probes = [[876, 281], [870, 285], [883, 277], [877, 261], [895, 304], [807, 264], [928, 357]]
+                baseline = None
+                for amount in (0, .5, 1, 0):
+                    window.evaluate_js(f"window.studyos.seekTalk({amount})")
+                    pixels = window.evaluate_js(f"window.studyos.inspectScenePixels({json.dumps(probes)})")
+                    if baseline is None:
+                        baseline = pixels
+                    elif amount == 0:
+                        assert pixels == baseline, "Closed speech did not restore original face"
+                    else:
+                        assert pixels[:3] != baseline[:3], "Mouth did not open"
+                        assert pixels[3:] == baseline[3:], "Speech changed nose, eyes or hand"
+                    capture_native_preview(window, APP_DIR / "artifacts" / "companion" / f"mouth-{amount:g}.png")
+                    window.evaluate_js("""(()=>{
+                        window.studyos.inspectScenePixels([]);
+                        const zoom=document.createElement('canvas');zoom.id='qa-mouth-zoom';zoom.width=720;zoom.height=480;
+                        zoom.style.cssText='position:fixed;left:0;top:0;z-index:9999;width:720px;height:480px;background:#f6f5f2';
+                        const c=zoom.getContext('2d');c.fillStyle='#f6f5f2';c.fillRect(0,0,720,480);
+                        c.drawImage(document.querySelector('.scene-mesh'),820,254,120,80,0,0,720,480);
+                        document.body.append(zoom);
+                    })()""")
+                    capture_native_preview(window, APP_DIR / "artifacts" / "companion" / f"mouth-zoom-{amount:g}.png")
+                    window.evaluate_js("document.getElementById('qa-mouth-zoom').remove()")
+                window.evaluate_js("window.studyos.finishIntro()")
+                # QA clicks are synthetic; activate our own window first so
+                # the same focus/resume path runs as a real desktop click.
+                from System import Func, Object
+                def focus_qa_window():
+                    window.native.Activate()
+                    return window.native.browser.webview.Focus()
+                window.native.Invoke(Func[Object](focus_qa_window))
+                time.sleep(.3)
+                window.evaluate_js("document.querySelector('.character-hit').click()")
+                dialogue = window.evaluate_js("window.studyos.getState().companion")
+                assert dialogue["text"] == "你是来学习的，不是来戳我的。", "First character click has wrong persona"
+                assert dialogue["speaking"], f"Character click did not start talking: {window.evaluate_js('({character:window.studyos.getState().character,focus:document.hasFocus(),hidden:document.hidden})')}"
+                mouth_samples = []
+                for _ in range(12):
+                    time.sleep(.09)
+                    mouth_samples.append(window.evaluate_js("window.studyos.getState().character.mouth"))
+                assert max(mouth_samples) > .4 and min(mouth_samples) < .1, "Speech has no syllables or pauses"
+                assert window.evaluate_js("window.studyos.pokeCharacter()") is False, "Fast clicks queued another utterance"
+                capture_native_preview(window, APP_DIR / "artifacts" / "companion" / "speaking.png")
+                duration = window.evaluate_js("window.studyos.getState().character.speechDuration")
+                time.sleep(duration/1000)
+                assert window.evaluate_js("window.studyos.getState().character.mouth") == 0
+                assert not window.evaluate_js("window.studyos.getState().companion.speaking")
+                window.evaluate_js("window.studyos.previewCompanion('idle'); window.studyos.openModule('course')")
+                paused = window.evaluate_js("window.studyos.getState().companion")
+                assert paused["suspended"] and not paused["speaking"] and not paused["typing"] and not paused["scheduled"]
+                window.evaluate_js("document.getElementById('module-dialog').close(); window.studyos.previewCompanion('idle'); document.getElementById('home-search').focus()")
+                assert not window.evaluate_js("window.studyos.getState().companion.scheduled"), "Reminders continued while searching"
+                assert not window.evaluate_js("window.studyos.getState().companion.speaking"), "Active reminder interrupted editing"
+                window.evaluate_js("document.getElementById('home-search').blur(); document.body.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))")
+                window.native.Invoke(Func[Object](focus_qa_window))
+                window.evaluate_js("document.querySelector('.character-hit').focus()")
+                time.sleep(.15)
+                resumed = window.evaluate_js("({focus:document.hasFocus(),state:window.studyos.getState().companion})")
+                # A background QA process cannot always claim OS foreground
+                # focus. It must stay quiet in that case, exactly like the app.
+                assert resumed["state"]["scheduled"] == resumed["focus"], f"Reminder focus guard is inconsistent: {resumed}"
+                window.evaluate_js("document.getElementById('toggle-motion').click(); document.querySelector('.mi-dialog').click()")
+                still = window.evaluate_js("window.studyos.getState()")
+                assert not still["motion"] and not still["character"]["speaking"] and still["character"]["mouth"] == 0
+                assert window.evaluate_js("document.querySelector('.dialog-cn').textContent") == still["companion"]["text"]
+                window.evaluate_js("document.getElementById('toggle-motion').click()")
+                smoke_result.update({"localDialogue": True, "persona": dialogue["persona"], "firstClick": dialogue["text"], "speechPulses": True,
+                    "closedFaceRestored": True, "onlyLipAreaChanged": True, "clickCooldown": True, "pausedOnModuleAndSearch": True,
+                    "reminderFocusGuard": True, "nativeReturnFocused": resumed["focus"], "staticDialogue": True})
             if args.animation_test:
                 deadline = time.monotonic() + 10
                 while not window.evaluate_js("window.studyos.getState().character.eyesReady") and time.monotonic() < deadline:
                     time.sleep(.1)
                 assert window.evaluate_js("window.studyos.getState().character.eyesReady"), "Eye art did not load"
                 captures = []
-                for milliseconds in (0, 1200, 2400, 2850, 3400, 4050, 4850, 5650, 6350, 6980, 7640, 8280, 8880, 9300):
+                for milliseconds in (0, 850, 1300, 1800, 2400, 3100, 3800, 4200, 4600, 4850, 5400, 6050, 6850, 7650, 8350, 8980, 9640, 10280, 10880, 11300):
                     window.evaluate_js(f"window.studyos.seekIntro({milliseconds})")
                     time.sleep(.06)
                     name = f"intro-{milliseconds:04d}.png"
@@ -232,19 +304,41 @@ def main():
                 # Check the visible hierarchy, not just the total duration.
                 # New controls must stay absent until the preceding act settles.
                 for milliseconds, visible, absent in (
-                    (2850, (), ("course", "writing", "daily", "grades")),
-                    (3740, ("course", "writing"), ("calendar", "exam", "daily")),
-                    (6300, ("course", "calendar", "assignment", "flashcards", "writing", "exam", "inbox", "originality"), ("daily", "grades")),
-                    (7070, ("daily",), ("grades",)),
-                    (7720, ("daily", "grades"), ()),
+                    (4850, (), ("course", "writing", "daily", "grades")),
+                    (5740, ("course", "writing"), ("calendar", "exam", "daily")),
+                    (8300, ("course", "calendar", "assignment", "flashcards", "writing", "exam", "inbox", "originality"), ("daily", "grades")),
+                    (9070, ("daily",), ("grades",)),
+                    (9720, ("daily", "grades"), ()),
                 ):
                     window.evaluate_js(f"window.studyos.seekIntro({milliseconds})")
                     opacity = window.evaluate_js("Object.fromEntries([...document.querySelectorAll('[data-module]')].map(n=>[n.dataset.module,Number(getComputedStyle(n).opacity)]))")
                     assert all(opacity[item] > .99 for item in visible), f"Act did not settle at {milliseconds}"
                     assert all(opacity[item] < .001 for item in absent), f"Acts overlapped at {milliseconds}"
-                window.evaluate_js("window.studyos.seekIntro(7720)")
+                # Read actual GPU pixels: no enclosure may leak through a wing
+                # mask, and all of its sides must arrive as one closed frame.
+                fields = json.loads((ROOT / 'src/data/scene-fields.json').read_text(encoding='utf-8'))
+                core_points = fields['enclosureProbes']
+                window.evaluate_js("window.studyos.seekIntro(8350)")
+                pixels = window.evaluate_js(f"window.studyos.inspectScenePixels({json.dumps(core_points)})")
+                assert all(pixel[3] == 0 for pixel in pixels), "Central frame leaked before its act"
+                window.evaluate_js("window.studyos.seekIntro(9070)")
+                pixels = window.evaluate_js(f"window.studyos.inspectScenePixels({json.dumps(core_points)})")
+                assert all(pixel[3] > 60 for pixel in pixels), "Central enclosure was cut into pieces"
+                for x,y,arrival in fields['strokeProbes']:
+                    window.evaluate_js(f"window.studyos.seekIntro({arrival-180})")
+                    before = window.evaluate_js(f"window.studyos.inspectScenePixels([[{x},{y}]])[0][3]")
+                    window.evaluate_js(f"window.studyos.seekIntro({arrival+180})")
+                    after = window.evaluate_js(f"window.studyos.inspectScenePixels([[{x},{y}]])[0][3]")
+                    assert before < after and after > 15, "Ink did not advance along traced contours"
+                fill_probe = json.dumps([fields['fillProbe']])
+                window.evaluate_js("window.studyos.seekIntro(3800)")
+                assert window.evaluate_js(f"window.studyos.inspectScenePixels({fill_probe})[0][3]") < 2, "Shading appeared during the line-art pass"
+                window.evaluate_js("window.studyos.seekIntro(4700)")
+                assert window.evaluate_js(f"window.studyos.inspectScenePixels({fill_probe})[0][3]") > 60, "Ink shading did not fill after the contours"
+                smoke_result.update({"enclosureNoLeaks": True, "completeEnclosure": True, "tracedInkProgress": True, "lineArtBeforeShading": True})
+                window.evaluate_js("window.studyos.seekIntro(9720)")
                 assert window.evaluate_js("Number(getComputedStyle(document.querySelector('.topbar')).opacity)") == 0, "Search appeared during the card act"
-                window.evaluate_js("window.studyos.seekIntro(8470)")
+                window.evaluate_js("window.studyos.seekIntro(10470)")
                 assert window.evaluate_js("Number(getComputedStyle(document.querySelector('.mi-dialog')).opacity)") == 0, "Welcome appeared before the room settled"
                 window.evaluate_js("window.studyos.finishIntro()")
                 for amount in (0, .5, 1):
@@ -296,12 +390,12 @@ def main():
             window.destroy()
 
     try:
-        qa = args.smoke_test or args.animation_test or args.performance_test
+        qa = args.smoke_test or args.animation_test or args.performance_test or args.companion_test
         webview.start(verify_native if qa else None, gui="edgechromium", debug=args.debug, private_mode=False, storage_path=str(DATA_DIR / ("qa-webview" if qa else "webview")))
     finally:
         server.shutdown()
         server.server_close()
-    if (args.smoke_test or args.animation_test or args.performance_test) and not smoke_result.get("passed"):
+    if (args.smoke_test or args.animation_test or args.performance_test or args.companion_test) and not smoke_result.get("passed"):
         raise SystemExit(1)
 
 

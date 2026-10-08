@@ -11,7 +11,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .skip-link:focus { top: 12px; }
 #app, #stage-wrap { width: 100vw; height: 100dvh; }
 #stage-wrap { position: relative; overflow: hidden; }
-.home-stage { position: absolute; left: 50%; top: 50%; width: 1672px; height: 941px; transform-origin: center; overflow: hidden; background: #f8f8f6; isolation: isolate; }
+.home-stage { position: absolute; left: 50%; top: 50%; width: 1672px; height: 941px; transform-origin: center; overflow: hidden; background: #f8f8f6 url('/resource-packs/MiStudyOS_Home_4K_AssetPack/07_background_decor/paper_texture_3840x2160.png') center / 100% 100%; isolation: isolate; }
 .art-layer { position: absolute; pointer-events: none; overflow: visible; }
 .feather-edge { mask-image: linear-gradient(to right, transparent, black 8px, black calc(100% - 8px), transparent), linear-gradient(to bottom, transparent, black 8px, black calc(100% - 8px), transparent); mask-composite: intersect; }
 .top-decor { z-index: 4; }
@@ -73,11 +73,15 @@ button { -webkit-tap-highlight-color: transparent; }
 .panel-arrow path { fill: none; stroke: #2d2c29; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
 .module-group:hover .panel-arrow { transform: translateX(2px); }
 .panel-hit { position: absolute; pointer-events: auto; z-index: 1; opacity: 0; border: 0; background: none; border-radius: 45%; }
-.mi-dialog { position: absolute; z-index: 29; left: 993px; top: 141px; width: 319px; height: 145px; background: transparent; border: 0; padding: 48px 20px 0 30px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; }
+.mi-dialog { position: absolute; z-index: 29; left: 993px; top: 141px; width: 319px; height: 145px; background: transparent; border: 0; padding: 45px 20px 0 30px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; }
 .mi-dialog .bubble-frame { left: -8px !important; top: -5px !important; z-index: -1; }
-.mi-dialog .dialog-cn { display: block; font-family: MiKai, KaiTi, serif; font-size: 19px; letter-spacing: .4px; white-space: nowrap; }
-.mi-dialog .dialog-en { display: block; font-size: 14px; letter-spacing: .3px; margin-top: 6px; white-space: nowrap; }
+.mi-dialog .dialog-cn { display: block; max-width: 269px; font-family: MiKai, KaiTi, serif; font-size: 16.5px; line-height: 1.25; letter-spacing: .25px; white-space: normal; text-wrap: balance; }
+.mi-dialog .dialog-en { display: block; max-width: 260px; font-size: 12px; line-height: 1.2; letter-spacing: .2px; margin-top: 4px; white-space: normal; text-wrap: balance; }
 .mi-dialog:hover .bubble-frame { filter: contrast(1.08); }
+.character-hit { position: absolute; left: 685px; top: 80px; width: 310px; height: 510px; z-index: 11; padding: 0; border: 0; background: transparent; cursor: pointer; border-radius: 45%; }
+.character-hit:focus-visible { outline: 1.5px solid #746d5c; outline-offset: -12px; background: #a69a7108; }
+.intro-running .character-hit, .intro-reduced .character-hit { pointer-events: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .footer-motto { position: absolute; top: 849px; left: 659px; width: 364px; text-align: center; z-index: 26; pointer-events: none; }
 .footer-motto p { font-family: MiKai, KaiTi, serif; font-size: 17px; letter-spacing: 4px; margin: 0 0 8px; }
 .footer-motto small { font-size: 10.5px; letter-spacing: .9px; display: block; white-space: nowrap; }
@@ -180,6 +184,7 @@ dialog::backdrop { background: #24221d30; backdrop-filter: blur(5px); }
   .mi-character .mi-master { clip-path: inset(0 0 275px 0); }
   .mi-sketch { display: none; }
   .mi-dialog { left: auto; right: 16px; top: 287px; width: 182px; height: 112px; padding: 29px 8px 0 10px; background: #f8f7f1b8; border: 1px solid #c4beb080; border-radius: 35px 35px 35px 0; }
+  .character-hit { left: calc(50% - 138px); top: 202px; width: 140px; height: 230px; }
   .mi-dialog .bubble-frame { display: none; }
   .mi-dialog .dialog-cn { font-size: 13px; white-space: normal; }
   .mi-dialog .dialog-en { font-size: 11px; white-space: normal; }
